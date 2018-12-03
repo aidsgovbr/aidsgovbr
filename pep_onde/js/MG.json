@@ -1,0 +1,256 @@
+ {
+    "estado":"MG - Minas Gerais",
+    "municipio":"PASSOS",
+    "servico":"AMBULATORIO ESCOLA PROFESSOR LUIZ CAMILO TEODORO DA SILVEIRA",
+    "endereco":"RUA SABARA Nº 164 CENTRO, PASSOS CEP: 37.900-004",
+    "telefone":"(35)3529-8030",
+    "hora":"08:00 às 18:00h"
+  },
+  {
+    "estado":"MG - Minas Gerais",
+    "municipio":"PASSOS",
+    "servico":"HOSPITAL SAO JOSE UNIMED",
+    "endereco":"AVENIDA DR. BRENO SOARES MAIA N°236- CEP: 37900110",
+    "telefone":"(35)3529-2450",
+    "hora":"24h"
+  },
+  {
+    "estado":"MG - Minas Gerais",
+    "municipio":"CONSELHEIRO LAFAIETE",
+    "servico":"POLICLINICA MUNICIPAL CONSELHEIRO LAFAETI",
+    "endereco":"AVENIDA PREFEITO MARIO RODRIGUES PEREIRA N°175- CENTRO- CONSELHEIRO LAFAETI",
+    "telefone":"(31)3769-2547",
+    "hora":"24h"
+  },
+  {
+    "estado":"MG - Minas Gerais",
+    "municipio":"OURO BRANCO",
+    "servico":"SAE OURO BRANCO",
+    "endereco":"RUA ALTO DO CRUZEIRO S/N CENTRO - OURO BRANCO, MG CEP 36420-000",
+    "telefone":"(31)3741-4665",
+    "hora":"08:00 às 18:00h"
+  },
+  {
+    "estado":"MG - Minas Gerais",
+    "municipio":"PATOS DE MINAS",
+    "servico":"UNIDADE PRONTO ATENDIMENTO UPA PORTE3",
+    "endereco":"RUA PELUZZO N°238 - BAIRRO PELUZZO - PATOS DE MINAS - MG",
+    "telefone":"(34)3822-9111",
+    "hora":"24h"
+  },
+  {
+    "estado":"MG - Minas Gerais",
+    "municipio":"CONSELHEIRO LAFAIETE",
+    "servico":"HOSPITAL QLUZ",
+    "endereco":"ALAMEIDA OSVALDO CRUZ 189",
+    "telefone":"(31)3763-1899",
+    "hora":"24h"
+  },
+  {
+    "estado":"MG - Minas Gerais",
+    "municipio":"ITUIUTABA",
+    "servico":"ADIC - ATENDIMENTO DE DOENÇAS INFECTOCONTAGIOSAS",
+    "endereco":"AVENIDA 45 Nº 164 BAIRRO ELANDIA",
+    "telefone":"(34)3268-2516",
+    "hora":"08:00 às 18:00h"
+  },
+  {
+    "estado":"MG - Minas Gerais",
+    "municipio":"PATOS DE MINAS",
+    "servico":"HOSPITAL REGIONAL ANTONIO DIAS",
+    "endereco":"RUA MAJOR GOTE Nº 1231 CENTRO",
+    "telefone":"(34)3818-6000",
+    "hora":"24h"
+  },
+  {
+    "estado":"MG - Minas Gerais",
+    "municipio":"VESPASIANO",
+    "servico":"CENTRO DE REFERENCIA VIDAL BRASIL",
+    "endereco":"RUA MANOEL CUNHA NUMERO 49 BAIRRO NAZIA",
+    "telefone":"(31)3621-1285",
+    "hora":"08:00 às 18:00h"
+  },
+  {
+    "estado":"MG - Minas Gerais",
+    "municipio":"IPATINGA",
+    "servico":"CENTRO DE CONTROLE DAS DOENÇAS INFECTO PARAZITARIAS",
+    "endereco":"RUA GOVERNADOR VALADARES, NUMERO 45, CENTRO, 35160041",
+    "telefone":"(31)3829-8601",
+    "hora":"08:00 às 18:00h"
+  },
+  {
+    "estado":"MG - Minas Gerais",
+    "municipio":"CORONEL FABRICIANO",
+    "servico":"PROGRAMA MUNICIPAL DE DST, AIDS E HEPATITES VIRAIS DE CORONEL FABRICIANO",
+    "endereco":"RUA SAO SEBASTIAO N°1007, BAIRRO: PROFESSORES",
+    "telefone":"(31)3846-3556",
+    "hora":"08:00 às 12:00h"
+  },
+  {
+    "estado":"MG - Minas Gerais",
+    "municipio":"GOVERNADOR VALADARES",
+    "servico":"CENTRO DE REFERENCIA DE ATENÇAO ESPECIAL A SAUDE",
+    "endereco":"RUA OSVALDO CRUZ Nº242 BAIRRO ESPLANADA CEP :35010210 GOVERNADOR VALADARES.",
+    "telefone":"(33)3271-3048",
+    "hora":"08:00 às 18:00h"
+  },
+  {
+    "estado":"MG - Minas Gerais",
+    "municipio":"JUIZ DE FORA",
+    "servico":"PROTOCOLO DE ATENDIMENTO AO RISCO BIOLOGICO OCUPACIONAL E SEXUAL",
+    "endereco":"AVENIDA BARAO DO RIO BRANCO 3408 ALTO DOS PASSOS",
+    "telefone":"(32)3690-8107",
+    "hora":"24h"
+  },
+  {
+    "estado":"MG - Minas Gerais",
+    "municipio":"SETE LAGOAS",
+    "servico":"UPA",
+    "endereco":"AVENIDA RAQUEL VIANA Nº716 BAIRRO CANAA CEP:35700293",
+    "telefone":"(31)3773-2600",
+    "hora":"24h"
+  },
+  {
+    "estado":"MG - Minas Gerais",
+    "municipio":"VESPASIANO",
+    "servico":"UPA PREFEITO LUIZ ISSA",
+    "endereco":"RUA TIRADENTES SEM NUMERO VESPACIANO CENTRO",
+    "telefone":"(31)3622-0800",
+    "hora":"24h"
+  },
+  {
+    "estado":"MG - Minas Gerais",
+    "municipio":"BELO HORIZONTE",
+    "servico":"CTA,SAE,SAGRADA FAMILIA",
+    "endereco":"RUA JOAQUIM FELICIO 141 BAIRRO SAGRADA FAMILIA BELO HORIZONTE MG",
+    "telefone":"(31)3277-9050",
+    "hora":"08:00 às 18:00h"
+  },
+  {
+    "estado":"MG - Minas Gerais",
+    "municipio":"JUIZ DE FORA",
+    "servico":"PROGRAMA MUNICIPAL DE DST/AIDS",
+    "endereco":"AVENIDA DOS ANDRADAS N°523- CENTRO- CEP: 36036000",
+    "telefone":"(32)3690-7054",
+    "hora":"08:00 às 18:00h"
+  },
+  {
+    "estado":"MG - Minas Gerais",
+    "municipio":"MURIAE",
+    "servico":"PROGRAMA MUNICIPAL DST AIDS E HEPATITES VIRAIS",
+    "endereco":"RUA VEREADOR JOSE MESSIAS SOARES, NUMERO 65, BAIRRO SANTO ANTONIO CEP: 36880000",
+    "telefone":"(32)3721-8838",
+    "hora":"08:00 às 18:00h"
+  },
+  {
+    "estado":"MG - Minas Gerais",
+    "municipio":"ARAXA",
+    "servico":"PRONTO ATENDIMENTO MUNICIPAL DE ARAXA",
+    "endereco":"PRAÇA AIRES MANEIRA, Nº 19 CENTRO",
+    "telefone":"(34)3691-7079",
+    "hora":"24h"
+  },
+  {
+    "estado":"MG - Minas Gerais",
+    "municipio":"PATOS DE MINAS",
+    "servico":"PROGRAMA MUNICIPAL DE DST, AIDS E HEPATITE VIRAIS CRONICAS",
+    "endereco":"RUA DR. NOE FERREIRA N°121 BAIRRO BELA VISTA CEP:38703234",
+    "telefone":"(34)3822-9808",
+    "hora":"08:00 às 18:00h"
+  },
+  {
+    "estado":"MG - Minas Gerais",
+    "municipio":"UBERABA",
+    "servico":"PROGRAMA MUNICIPAL DE HIV E HEPATITE VIRAIS",
+    "endereco":"RUA MARECHAL TEODORO Nº166 BAIRRO SAO BENEDITO CEP:",
+    "telefone":"(34)3333-7787",
+    "hora":"08:00 às 18:00h"
+  },
+  {
+    "estado":"MG - Minas Gerais",
+    "municipio":"BELO HORIZONTE",
+    "servico":"UNIDADE REFERENCIA SEGUNADARIA/SAE",
+    "endereco":"RUA PARAIBA 890 FUNCIONARIOS",
+    "telefone":"(31)3277-5305",
+    "hora":"08:00 às 19:00h"
+  },
+  {
+    "estado":"MG - Minas Gerais",
+    "municipio":"CONSELHEIRO LAFAIETE",
+    "servico":"CENTRO PROMOÇAO DA SAUDE",
+    "endereco":"AVENIDA DOM PEDRO II Nº190 BAIRRO SAO SEBASTIAO 36400000",
+    "telefone":"(31)3769-9054",
+    "hora":"08:00 às 18:00h"
+  },
+  {
+    "estado":"MG - Minas Gerais",
+    "municipio":"POCOS DE CALDAS",
+    "servico":"CENTRO DE REFERENCIA DE DST AIDS HEPATITES VIRAIS",
+    "endereco":"RUA PARAIBA NUMERO 150",
+    "telefone":"(35)3536-9722",
+    "hora":"08:00 às 18:00h"
+  },
+  {
+    "estado":"MG - Minas Gerais",
+    "municipio":"BELO HORIZONTE",
+    "servico":"ATENDIMENTO A VITIMAS DE VIOLENCIA SEXUAL OU ACIDENTES DE TRABALHO.",
+    "endereco":"RUA FORMIGA NUMERO 50",
+    "telefone":"(31)3277-6231",
+    "hora":"24h"
+  },
+  {
+    "estado":"MG - Minas Gerais",
+    "municipio":"UBERLANDIA",
+    "servico":"AMBULATORIO HERBERT DE SOUZA DST AIDS HEPATITES VIRAIS",
+    "endereco":"RUA AVELINO DO NASCIMENTO N 15 BAIRO PRSIDENTE ROOSEVELT",
+    "telefone":"(34)3215-2444",
+    "hora":"08:00 às 18:00h"
+  },
+  {
+    "estado":"MG - Minas Gerais",
+    "municipio":"RIBEIRAO DAS NEVES",
+    "servico":"HOSPITAL SAO JUDAS TADEU",
+    "endereco":"VALDEMAR JOSE ALVES N°65 - BAIRRO STATUS - RIBEIRAO DAS NEVES - MG - CEP:33880190",
+    "telefone":"(31)3625-4184",
+    "hora":"24h"
+  },
+  {
+    "estado":"MG - Minas Gerais",
+    "municipio":"CONTAGEM",
+    "servico":"DST AIDS E HEPATITES VIRAIS CCE IRIA DINIZ CONTAGEM/MG",
+    "endereco":"AVENIDA JOAO CESAR DE OLIVEIRA 2889 BAIRRO EL DOURADO CONTAGEM/MG",
+    "telefone":"(31)3352-2362",
+    "hora":"08:00 às 18:00h"
+  },
+  {
+    "estado":"MG - Minas Gerais",
+    "municipio":"BELO HORIZONTE",
+    "servico":"HOSPITAL GOVERNADOR ISRAEL PINHEIRO DO IPSEMG",
+    "endereco":"ALAMEDA EZEQUIEL DIAS Nº 225 BELO HORIZONTE CEP: 30.130-110",
+    "telefone":"(31)3237-2282",
+    "hora":"24h"
+  },
+  {
+    "estado":"MG - Minas Gerais",
+    "municipio":"BELO HORIZONTE",
+    "servico":"CTRDIP ORESTES DINIZ",
+    "endereco":"ALAMEDA ALVARO CELSO 241, SANTA EFIGENIA, CEP 30150260",
+    "telefone":"(31)3277-1198",
+    "hora":"08:00 às 18:00h"
+  },
+  {
+    "estado":"MG - Minas Gerais",
+    "municipio":"SANTA LUZIA",
+    "servico":"HOSPITAL DE SAO JOAO DE DEUS",
+    "endereco":"RUA FLORIANO PEIXOTO, NUMERO 333, CENTRO CEP: 33010030",
+    "telefone":"(31)3641-2071",
+    "hora":"24h"
+  },
+  {
+    "estado":"MG - Minas Gerais",
+    "municipio":"ITABIRA",
+    "servico":"SERVIÇO DE ATENÇAO ESPECIALIZADA EM DST, HIV, AIDS DE ITABIRA.",
+    "endereco":"RUA LUIZ VENTURA Nº 75 BAIRRO: VILA PIEDADE CEP: 35.900-205",
+    "telefone":"(31)3839-2399",
+    "hora":"08:00 às 18:00h"
+  },

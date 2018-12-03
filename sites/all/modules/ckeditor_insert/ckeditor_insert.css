@@ -1,0 +1,60 @@
+.ckeditor_insert_white_overlay {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: #FFFFFF;
+	z-index: 10001;
+	-moz-opacity: 0.5;
+	opacity: .50;
+	filter: alpha(opacity=50);
+}
+
+.ckeditor_insert_dialog {
+	display: none;
+	position: fixed;
+	top: 5%;
+	left: 20%;
+	width: 60%;
+	padding: 16px;
+	border: 5px solid #C0C0C0;
+	background-color: #FFFFFF;
+	z-index: 10002;
+	overflow: auto;
+	max-height: 90%;
+}
+
+/* Close Button */
+#ckeditor_image_insert_close_button {
+  cursor: pointer;
+  border-radius: 2px;
+  border: none;
+  padding: 4px 8px;
+  margin-bottom: 1em;
+  margin-right: 1em;/* LTR */
+  color: #fff;
+  text-align: center;
+  background: #b73939;
+}
+a#ckeditor_image_insert_close_button {
+  padding: 4px 8px;
+  text-decoration: none;
+  border-radius: 2px;
+  border: none;
+}
+#ckeditor_image_insert_close_button:hover {
+  background: #990000;
+  text-decoration: none;
+  border-radius: 2px;
+  border: none;
+  color: #fff;
+}
+#ckeditor_image_insert_close_button:active {
+  box-shadow: 0 2px 2px rgba(0,0,0,0.75) inset;
+  background: #333;
+  border-radius: 2px;
+  border: none;
+  color: #fff;
+}

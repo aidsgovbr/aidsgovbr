@@ -1,0 +1,129 @@
+
+//== Header
+#header {
+  background-color: @header-bg-top;
+
+  background-color: @header-bg-top;
+  background-image: -webkit-linear-gradient(top, @header-bg-top, @header-bg-bottom);
+  background-image:         linear-gradient(to bottom, @header-bg-top, @header-bg-bottom);
+
+  a {
+    color: @header-text;
+  }
+  .social .fa:hover:before {
+    color: @header-shortcuts;
+  }
+  .header-top .shortcuts {
+    a {
+      color: @header-shortcuts;
+    }
+    a:hover {
+      color: @header-shortcuts-hover;
+    }
+
+    li span {
+      background-color: @header-shortcuts;
+      color: @header-bg-top;
+    }
+    li:hover span {
+       background-color: @header-shortcuts-hover;
+    }
+  }
+
+  .header-top .accessibility {
+    border-color: @header-shortcuts !important;
+
+    a {
+      color: @header-shortcuts;
+    }
+    a:hover {
+      color: @header-shortcuts-hover;
+    }
+  }
+  .search-form .btn-default {
+    color: @header-search-text;
+  }
+}
+//== page-header
+.breadcrumb a {
+  color: @sidebar-block-no-title;
+}
+//== Navbar
+#navbar {
+  background-color: @header-navbar;
+
+  a {
+    color: @header-text;
+  }
+
+  .menu.secondary li {
+    border-color: @header-text;
+  }
+}
+.navbar-toggle .icon-bar  {
+  background: @header-text;
+}
+.navbar-toggle h4 {
+  color: @header-text;
+  text-transform: uppercase;
+}
+.navbar-toggle {
+  border-color: @header-text;
+  background-image: linear-gradient(to bottom, #ffffff, #e6e6e6);
+}
+
+//== Footer
+.footer {
+  background-color: @footer-bg;
+  color: @footer-text;
+
+  .block .content a {
+    color: @footer-link;
+  }
+  .block .content a:hover, .block .content a:focus {
+    color: @header-shortcuts;
+  }
+  .block-title {
+    color: @footer-text;
+  }
+}
+#footer-brasil {
+  background-color: @footer-info-bg;
+}
+.footer-column {
+  .block{
+    border-color: @footer-border-color;
+  }
+}
+//== Sidebar First
+.region-sidebar-first {
+  .block-title {
+    color: @sidebar-block-title;
+    border-top: 4px solid @sidebar-block-title;
+  }
+  .block-no-title li a {
+    color: @sidebar-block-no-title;
+  }
+  .active {
+    border-color: @sidebar-block-title;
+  }
+}
+//== font-govbr icons
+.font-govbr:before {
+  color: @font-govbr;
+}
+.font-govbr:hover:before {
+  color: @font-govbr-hover;
+}
+.font-govbr-square:before {
+  background: @font-govbr;
+}
+.font-govbr-square:hover:before {
+  background: @font-govbr-hover;
+}
+//== Mobile
+@media (max-width: 768px) {
+  #sidebar-first-menu {
+    background-color: @footer-bg;
+  }
+}

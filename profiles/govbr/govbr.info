@@ -1,0 +1,44 @@
+; Packaging information for govbr
+name = "GovBR"
+description = ""
+exclusive = "1"
+core = "7.x"
+; ----------
+; Dependencies
+; ----------
+; Administration
+dependencies[] = admin_menu
+dependencies[] = admin_menu_toolbar
+dependencies[] = module_filter
+; Chaos tool suite
+; dependencies[] = ctools
+; Core
+dependencies[] = block
+dependencies[] = contextual
+dependencies[] = dblog
+dependencies[] = field
+dependencies[] = field_sql_storage
+dependencies[] = filter
+dependencies[] = menu
+dependencies[] = node
+dependencies[] = overlay
+dependencies[] = system
+dependencies[] = text
+dependencies[] = update
+dependencies[] = user
+; Other
+dependencies[] = menu_attributes
+dependencies[] = strongarm
+; User interface
+dependencies[] = jquery_update
+; Features
+dependencies[] = features
+dependencies[] = govbr_core
+
+
+; Information added by Drupal.org packaging script on 2015-06-25
+version = "7.x-1.x-dev"
+core = "7.x"
+project = "govbr"
+datestamp = "1435263494"
+

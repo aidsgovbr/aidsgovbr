@@ -1,0 +1,14 @@
+﻿/* =============================================================
+   HOME/VEDIO SECTION STYLES
+ ============================================================ */
+#home-sec {
+    height:400px;
+    color:#fff;
+    text-align:center;
+    border-bottom:4px solid #000;
+}
+    #home-sec .overlay {
+        background-color:rgba(0, 0, 0, 0.2);
+        min-height:400px;
+    }
+

@@ -1,0 +1,97 @@
+/*
+  Icon Font: font-govbr
+*/
+
+@font-face {
+  font-family: "font-govbr";
+  src: url("./font-govbr_a52d4c8cd5133fd41eca385ceabab2de.eot");
+  src: url("./font-govbr_a52d4c8cd5133fd41eca385ceabab2de.eot?#iefix") format("embedded-opentype"),
+       url("./font-govbr_a52d4c8cd5133fd41eca385ceabab2de.woff") format("woff"),
+       url("./font-govbr_a52d4c8cd5133fd41eca385ceabab2de.ttf") format("truetype"),
+       url("./font-govbr_a52d4c8cd5133fd41eca385ceabab2de.svg#font-govbr") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: "font-govbr";
+    src: url("./font-govbr_a52d4c8cd5133fd41eca385ceabab2de.svg#font-govbr") format("svg");
+  }
+}
+
+[data-icon]:before { content: attr(data-icon); }
+
+[data-icon]:before,
+.icon-administracao:before,
+.icon-agropecuaria:before,
+.icon-comercio-servicos:before,
+.icon-comunicacoes:before,
+.icon-cultura:before,
+.icon-defesa_nacional:before,
+.icon-economia_financas:before,
+.icon-educacao:before,
+.icon-email:before,
+.icon-energia:before,
+.icon-esportes_lazer:before,
+.icon-habitacao:before,
+.icon-industria:before,
+.icon-meio_ambiente:before,
+.icon-outros:before,
+.icon-pesquisa_desenvolvimento:before,
+.icon-presencial:before,
+.icon-previdencia_social:before,
+.icon-protecao_social:before,
+.icon-relacoes_internacionais:before,
+.icon-saneamento_basico:before,
+.icon-saude:before,
+.icon-seguranca_ordempublica:before,
+.icon-sms:before,
+.icon-telefone:before,
+.icon-trabalho:before,
+.icon-transporte:before,
+.icon-urbanismo:before,
+.icon-web:before {
+  display: inline-block;
+  font-family: "font-govbr";
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  line-height: 1;
+  text-decoration: inherit;
+  text-rendering: optimizeLegibility;
+  text-transform: none;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+}
+
+.icon-administracao:before { content: "\f11d"; }
+.icon-agropecuaria:before { content: "\f11e"; }
+.icon-comercio-servicos:before { content: "\f11f"; }
+.icon-comunicacoes:before { content: "\f120"; }
+.icon-cultura:before { content: "\f121"; }
+.icon-defesa_nacional:before { content: "\f122"; }
+.icon-economia_financas:before { content: "\f123"; }
+.icon-educacao:before { content: "\f124"; }
+.icon-email:before { content: "\f125"; }
+.icon-energia:before { content: "\f126"; }
+.icon-esportes_lazer:before { content: "\f127"; }
+.icon-habitacao:before { content: "\f128"; }
+.icon-industria:before { content: "\f129"; }
+.icon-meio_ambiente:before { content: "\f12a"; }
+.icon-outros:before { content: "\f12b"; }
+.icon-pesquisa_desenvolvimento:before { content: "\f12c"; }
+.icon-presencial:before { content: "\f12d"; }
+.icon-previdencia_social:before { content: "\f12e"; }
+.icon-protecao_social:before { content: "\f12f"; }
+.icon-relacoes_internacionais:before { content: "\f130"; }
+.icon-saneamento_basico:before { content: "\f131"; }
+.icon-saude:before { content: "\f132"; }
+.icon-seguranca_ordempublica:before { content: "\f133"; }
+.icon-sms:before { content: "\f134"; }
+.icon-telefone:before { content: "\f135"; }
+.icon-trabalho:before { content: "\f136"; }
+.icon-transporte:before { content: "\f137"; }
+.icon-urbanismo:before { content: "\f138"; }
+.icon-web:before { content: "\f139"; }

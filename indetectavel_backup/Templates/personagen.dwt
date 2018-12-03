@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+<head lang="pt">
+      <!-- Google Tag Manager -->
+      <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+         new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+         j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+         'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+         })(window,document,'script','dataLayer','GTM-T9DTKDV');
+      </script>
+      <!-- End Google Tag Manager -->
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <!--Page Title-->
+      <!-- TemplateBeginEditable name="doctitle" -->
+      <title>Indetectável</title>
+      <!-- TemplateEndEditable -->
+   <!--Meta Keywords and Description-->
+   <meta name="keywords" content="Indetectável">
+      <meta name="description" content="Indetectável">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes"/>
+      <!-- Google / Search Engine Tags -->
+      <meta itemprop="name" content="Estou indetectável">
+      <meta itemprop="description" content="Indetectável Should be greater than 80 and smaller than 160 character">
+      <meta itemprop="image" content="http://www.aids.gov.br/indetectavel/images/logo_share2.png">
+      <!-- Facebook Meta Tags -->
+      <meta property="fb:admins” content=”ISTAidsHV"/>
+      <meta property="og:type" content="website" />
+      <meta property="og:title" content="Estou indetectável" />
+      <meta property="og:url" content="http://www.aids.gov.br/indetectavel/" />
+      <meta property="og:image" content="http://www.aids.gov.br/indetectavel/images/logo_share2.png" />
+      <meta property="og:description" content="descrição aqui" />
+      <meta property="og:site_name" content="Indetectável" />
+      <!-- Twitter Meta Tags -->
+      <meta name="twitter:card" content="summary" />
+      <meta name="twitter:title" content="Indetectável título aqui" />
+      <meta name="twitter:description" content="Your 200-character description here" />
+      <meta name="twitter:url" content="http://www.aids.gov.br/indetectavel" />
+      <meta name="twitter:image" content="http://www.aids.gov.br/indetectavel/images/logo_share.png" />
+      <meta charset="UTF-8">
+      <!--Favicon-->
+      <link rel="shortcut icon" href="images/favicon.ico" title="Favicon"/>
+      <!-- Main CSS Files -->
+      <link rel="stylesheet" href="css/style.css">
+      <!-- Namari Color CSS -->
+      <link rel="stylesheet" href="css/namari-color.css">
+      <!--Icon Fonts - Font Awesome Icons-->
+      <link rel="stylesheet" href="css/font-awesome.min.css">
+      <!-- Animate CSS-->
+      <link href="css/animate.css" rel="stylesheet" type="text/css">
+      <!--featherlight css -->
+      <link href="https://cdn.rawgit.com/noelboss/featherlight/1.7.13/release/featherlight.min.js" type="text/css" rel="stylesheet" />
+      <link href="https://cdn.rawgit.com/noelboss/featherlight/1.7.13/release/featherlight.gallery.min.css" type="text/css" rel="stylesheet" />
+      <!-- timeline CSS-->
+      <link rel="stylesheet" href="timeline/css/style.css">
+      <!-- Resource style -->
+      <!--<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>-->
+      <link href="https://fonts.googleapis.com/css?family=Bungee:400,300,600,700,800" rel="stylesheet" type="text/css">
+      <link href="https://fonts.googleapis.com/css?family=Kalam:400,300,600,700,800" rel="stylesheet" type="text/css">
+      <link href="https://fonts.googleapis.com/css?family=Caveat:400,700" rel="stylesheet" type="text/css">
+      <!-- Global site tag (gtag.js) - Google Analytics -->
+      <script async src="https://www.googletagmanager.com/gtag/js?id=UA-76617441-7"></script>
+      <script>
+         window.dataLayer = window.dataLayer || [];
+         function gtag(){dataLayer.push(arguments);}
+         gtag('js', new Date());
+         
+         gtag('config', 'UA-76617441-7');
+      </script>
+      <!-- sharethis.js -->
+      <script type="text/javascript" src="//platform-api.sharethis.com/js/sharethis.js#property=5be09428b789db0011cddc78&product=inline-share-buttons"></script>
+      <!-- TemplateBeginEditable name="head" -->
+      <!-- TemplateEndEditable -->
+</head>
+   <body>
+      <!-- Google Tag Manager (noscript) -->
+      <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T9DTKDV" height=
+         "0" width="0" class="c1"></iframe></noscript>
+      <!-- End Google Tag Manager (noscript) -->
+      <!-- Preloader -->
+      <div id="preloader">
+         <div id="status" class="la-ball-triangle-path"></div>
+      </div>
+      <!--End of Preloader-->
+      <div class="page-border" data-wow-duration="0.7s" data-wow-delay="0.2s">
+         <div class="top-border wow fadeInDown animated c2"></div>
+         <div class="right-border wow fadeInRight animated c3"></div>
+         <div class="bottom-border wow fadeInUp animated c4"></div>
+         <div class="left-border wow fadeInLeft animated c5"></div>
+      </div>
+      <div id="wrapper">
+         <header id="banner" class="scrollto clearfix" data-enllax-ratio=".5">
+            <div id="header" class="nav-collapse">
+               <div class="row clearfix">
+                  <div class="col-1">
+                     <!--Logo-->
+                     <div id="logo">
+                        <!--The Logo that is shown on the sticky Navigation Bar-->
+                        <img src="images/logo.png" id="navigation-logo" alt="logo"/>
+                        <!--End of Navigation Logo-->
+                     </div>
+                     <!--End of Logo-->
+
+                        <!--Social Icons in Header-->
+                        <div class="sharethis-inline-share-buttons"></div>
+                        <!--End of Social Icons in Header-->
+					 <!--close window-->
+			            <div class="fecha_janela"><a href="javascript:close_window();">Fecha janela (x)</a></div>
+                  </div>
+               </div>
+            </div>
+            <!--End of Header-->
+            <!--Banner Content-->
+            <div id="banner-content" class="row clearfix">
+               <!-- <div class="col-38">-->
+               <div class="col-45">
+                  <h1><br></h1>
+                  <h2><br><br><br><br><br><br></h2>
+               </div>
+            </div>
+            <!--End of Row-->
+         </header>
+         <!--Main Content Area-->
+         <main id="content">
+            <!--Personagens-->
+            <aside id="personagens" class="scrollto text-center" data-enllax-ratio=".2">
+               <div class="row clearfix">
+                  <!--Personagens-->
+                  <div class="clearfix">
+                     <div class="section-heading">
+                        <!--<h3 class="squarebrackets">DESTAQUE</h3>-->
+                        <h2 class="section-title">Ariadne Ribeiro</h2>
+                     </div>
+                     <!--User Testimonial-->
+                     <div class="no-padding-bottom clearfix">
+                        <!--Content Left Side-->
+                        <div class="col-3 wow fadeInLeft" data-wow-delay="0.1s">
+                           <!--User Testimonial-->
+                           <blockquote class="testimonial text-right bigtest">
+                              <q>Levei um choque. Passei por um turbilhão de coisas e só me atentei mesmo
+                              para o HIV quando estava com 42 quilos e um quadro de tuberculose</q> &#8212;
+                              Ariadne Ribeiro
+                           </blockquote>
+                           <!-- End of Testimonial-->
+                        </div>
+                        <!--End Content Left Side-->
+                        <!--Content of the Right Side-->
+                        <div class="col-2 text-left">
+                           <p>Mulher Trans, guerreira e mãe. Assim podemos definir Ariadne Ribeiro, que
+                              escreveu mais uma página do livro de sua vida lutando contra as barreiras
+                              impostas pelo preconceito, a batalha contra as drogas, o teste de HIV e as
+                              desilusões. Mas também a mulher forte que passou por todos estes desafios e
+                              hoje é &#8220;a mão amiga&#8221; que acolhe pessoas em estado de
+                              vulnerabilidade e dependentes de substâncias psicoativas.
+                           </p>
+                           <!--<div class="col-1 wow fadeIn" data-wow-delay="0.5s">-->
+                           <!--User Testimonial-->
+                           <p>Ariadne percebeu que era uma mulher aos 13 anos de idade. À época, seus pais
+                              não aceitaram sua identidade de gênero, o que fez com que ela saísse de casa.
+                              Aos 18 anos, depois de ter perdido sua avó, ela foi estuprada e descobre que
+                              havia contraído HIV.
+                           </p>
+                           <!-- End of Testimonial-->
+                           <!--</div>-->
+                           <p class="quote">Levei um choque. Passei por um turbilhão de coisas e só me
+                              atentei mesmo para o HIV quando estava com 42 quilos e um quadro de
+                              tuberculose&#8221;, diz.
+                           </p>
+                           <p>Foi então que ela virou mais uma página. Em busca de aceitação, ela buscou
+                              proteção aos braços de uma pessoa que julgava ser o homem de sua vida. Foi um
+                              grande erro e um grande acerto também. O erro por que ela se casou com uma
+                              pessoa perigosa, que possuía ligação com o crime, em especial no tráfico de
+                              drogas. E o primeiro acerto devido justamente ao tráfico de drogas, Ariadne
+                              utilizou a máxima de &#8220;quem vende, não consome&#8221;, fazendo com que ela
+                              parasse de utilizar.
+                           </p>
+                           <p>O segundo acerto deste relacionamento, foi o fato de se tornar mãe. Com 30
+                              dias de relacionamento, ele me apresentou o Bruno, seu filho, que tinha 2 anos.
+                              &#8220;Cuidei dele até os 9 anos e sou mãe dele. Eu sinto orgulho muito grande
+                              de ter me colocado neste papel. Talvez não tenha sido um pai ou mão biológicos,
+                              mas eu sou a referência dele como mãe&#8221;.
+                           </p>
+                           <p>Ariadne continua o tratamento para o HIV e hoje está indetectável. Ela se
+                              formou e está terminando o doutorado do Programa de Psiquiatria e Psicologia
+                              Médica da UNIFESP. Ela trabalha com pessoas dependentes de substâncias
+                              psicoativas, em especial com populações-chaves e procura atender pessoas Trans,
+                              por estar diretamente ligado à sua trajetória de vida. &#8220;Em um ambiente
+                              tão propício às Infecções Sexualmente Transmissíveis e o Hiv e tão difícil de
+                              acessar, faz com que eu tenha a certeza de que eu esteja contribuindo para que
+                              minha história tenha significado&#8221;, conclui.
+                           </p>
+                        </div>
+                        <!--End Content Right Side-->
+                     </div>
+                  </div>
+                  <!--End of Content Section-->
+               </div>
+               <!--End of Row-->
+               <!--End of Personagens-->
+               <!--Gallery-->
+               <div class="row clearfix row text-center scrollto clearfix" id="gallery"
+                  data-featherlight-gallery="" data-featherlight-filter="a">
+                  <a href="https://www.youtube.com/embed/IOuhyS5oCW4?rel=0&amp;autoplay=1"
+                     data-featherlight="iframe" class="gallery col-3" data-wow-delay="0.1s"
+                     data-featherlight-iframe-width="950px" data-featherlight-iframe-height="531px"
+                     data-featherlight-iframe-frameborder="0" data-featherlight-iframe-allow=
+                     "autoplay; encrypted-media" data-featherlight-iframe-allowfullscreen=
+                     "true"><img class="facebook" src="images/miniatura_videos_personagens.jpg" alt=
+                     "Vídeo campanha"></a> <a href="images/galeria/ariadne_01.jpg" data-featherlight=
+                     "image" class="gallery col-3"><img class="facebook" src=
+                     "images/galeria/ariadne_01.jpg" alt="Americo"></a> <a href=
+                     "images/galeria/ariadne_02.jpg" data-featherlight="image" class=
+                     "gallery col-3"><img class="facebook" src="images/galeria/ariadne_02.jpg" alt=
+                     "Ariadne"></a> <a href="images/galeria/ariadne_03.jpg" data-featherlight="image"
+                     class="gallery col-3"><img class="facebook" src="images/galeria/ariadne_03.jpg" alt=
+                     "Beatriz"></a> <a href="images/galeria/ariadne_04.jpg" data-featherlight="image"
+                     class="gallery col-3"><img class="facebook" src="images/galeria/ariadne_04.jpg" alt=
+                     "Bolacha"></a> <a href="images/galeria/ariadne_05.jpg" data-featherlight="image"
+                     class="gallery col-3"><img class="facebook" src="images/galeria/ariadne_05.jpg" alt=
+                     "Cida"></a>
+               </div>
+               <!--End of Gallery-->
+         <!--Footer-->
+            </aside>
+         </main>
+         <footer id="landing-footer" class="clearfix">
+            <p id="copyright" class="col-1">créditos aqui<br> <a href="http://www.aids.gov.br" target="_blank">Departamento de Vigilância, Prevenção e Controle das IST, do HIV/Aids e das Hepatites Virais</a>
+            </p>
+         </footer>
+         <!--End of Footer-->
+      </div>
+      <!-- Include JavaScript resources -->
+      <script src="js/jquery.1.8.3.min.js"></script>
+      <script src="js/wow.min.js"></script>
+      <script src="js/featherlight.min.js"></script>
+      <script src="js/featherlight.gallery.min.js"></script>
+      <script src="js/jquery.enllax.min.js"></script>
+      <script src="js/jquery.scrollUp.min.js"></script>
+      <script src="js/jquery.easing.min.js"></script>
+      <script src="js/jquery.stickyNavbar.min.js"></script>
+      <script src="js/jquery.waypoints.min.js"></script>
+      <script src="js/images-loaded.min.js"></script>
+      <script src="js/lightbox.min.js"></script>
+      <script src="js/site.js"></script>
+      <script src="timeline/js/main.js"></script>
+      <script>
+         $(document).ready(function(){
+         	$('.gallery').featherlightGallery({
+         		gallery: {
+         			fadeIn: 300,
+         			fadeOut: 300
+         		},
+         		openSpeed:    300,
+         		closeSpeed:   300
+         	});
+         	$('.gallery2').featherlightGallery({
+         		gallery: {
+         			next: 'next »',
+         			previous: '« previous'
+         		},
+         		variant: 'featherlight-gallery2'
+         	});
+         });
+      </script>
+	<script>
+		function close_window() {
+   {
+    close();
+  }
+}
+	</script>
+   </body>
+</html>

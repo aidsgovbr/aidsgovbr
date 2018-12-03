@@ -1,0 +1,375 @@
+<?php
+
+/**
+ * @file
+ * Autocomplete term widget.
+ */
+
+/**
+ * Implements hook_help().
+ */
+function term_reference_autocreate_help($path, $arg) {
+  switch ($path) {
+    case 'admin/help#term_reference_autocreate':
+
+      $filepath = dirname(__FILE__) . '/README.md';
+      if (file_exists($filepath)) {
+        $readme = file_get_contents($filepath);
+      }
+      else {
+        $filepath = dirname(__FILE__) . '/README.txt';
+        if (file_exists($filepath)) {
+          $readme = file_get_contents($filepath);
+        }
+      }
+      if (!isset($readme)) {
+        return NULL;
+      }
+      if (module_exists('markdown')) {
+        $filters = module_invoke('markdown', 'filter_info');
+        $info = $filters['filter_markdown'];
+
+        if (function_exists($info['process callback'])) {
+          $output = $info['process callback']($readme, NULL);
+        }
+        else {
+          $output = '<pre>' . $readme . '</pre>';
+        }
+      }
+      else {
+        $output = '<pre>' . $readme . '</pre>';
+      }
+
+      return $output;
+  }
+}
+
+/**
+ * Implements hook_menu().
+ */
+function term_reference_autocreate_menu() {
+  $items['term_reference/autocomplete/%/%/%'] = array(
+    'page arguments' => array(2, 3, 4),
+    'page callback' => 'term_reference_autocreate_autocomplete',
+    'access callback' => 'term_reference_autocreate_access',
+    'access arguments' => array(2, 3, 4),
+    'type' => MENU_CALLBACK,
+  );
+  return $items;
+}
+
+/**
+ * Menu access callback for reference autocomplete paths.
+ *
+ * Check for both 'edit' and 'view' access in the unlikely event
+ * a user has edit but not view access.
+ */
+function term_reference_autocreate_access($entity_type, $bundle, $field_name) {
+  return user_access('access content', NULL)
+  && ($field = field_info_field($field_name))
+  && field_info_instance($entity_type, $field_name, $bundle)
+  && field_access('view', $field, $entity_type, NULL, NULL)
+  && field_access('edit', $field, $entity_type, NULL, NULL);
+}
+
+/**
+ * Implements hook_field_widget_info().
+ */
+function term_reference_autocreate_field_widget_info() {
+  return array(
+    'term_reference_autocreate' => array(
+      'label'       => t('Autocomplete text field (create new)'),
+      'description' => t('Display the list of referenceable terms as a textfield with autocomplete behaviour.'),
+      'field types' => array('taxonomy_term_reference'),
+      'settings'    => array(
+        'autocomplete_match' => 'contains',
+        'size' => 60,
+        'autocomplete_path' => 'term_reference/autocomplete',
+      ),
+    ),
+  );
+}
+
+/**
+ * Implements hook_field_widget_settings_form().
+ */
+function term_reference_autocreate_field_widget_settings_form($field, $instance) {
+  $widget   = $instance['widget'];
+  $defaults = field_info_widget_settings($widget['type']);
+  $settings = array_merge($defaults, $widget['settings']);
+
+  $form = array();
+  if ($widget['type'] == 'term_reference_autocreate') {
+    $form['autocomplete_match'] = array(
+      '#type'             => 'select',
+      '#title'            => t('Autocomplete matching'),
+      '#default_value'    => $settings['autocomplete_match'],
+      '#options'          => array(
+        'starts_with'     => t('Starts with'),
+        'contains'        => t('Contains'),
+      ),
+      '#description'      => t('Select the method used to collect autocomplete suggestions. Note that <em>Contains</em> can cause performance issues on sites with thousands of nodes.'),
+    );
+    $form['size'] = array(
+      '#type'             => 'textfield',
+      '#title'            => t('Size of textfield'),
+      '#default_value'    => $settings['size'],
+      '#element_validate' => array('_element_validate_integer_positive'),
+      '#required'         => TRUE,
+    );
+  }
+  return $form;
+}
+
+/**
+ * Implements hook_field_widget_form().
+ */
+function term_reference_autocreate_field_widget_form(&$form, &$form_state, $field, $instance, $langcode, $items, $delta, $element) {
+  switch ($instance['widget']['type']) {
+    case 'term_reference_autocreate':
+      $element += array(
+        '#type' => 'textfield',
+        '#default_value' => isset($items[$delta]['tid']) ? $items[$delta]['tid'] : NULL,
+        '#autocomplete_path' => $instance['widget']['settings']['autocomplete_path'] . '/' . $instance['entity_type'] . '/' . $instance['bundle'] . '/' . $field['field_name'],
+        '#size' => $instance['widget']['settings']['size'],
+        '#maxlength' => NULL,
+        '#element_validate' => array('term_reference_autocreate_validate'),
+        '#value_callback' => 'term_reference_autocreate_value',
+      );
+      break;
+  }
+
+  return array('tid' => $element);
+}
+
+/**
+ * Value callback for a term_reference_autocreate element.
+ *
+ * Replace the term tid with a term name.
+ */
+function term_reference_autocreate_value($element, $input = FALSE, $form_state) {
+  if ($input === FALSE) {
+    // We're building the displayed 'default value': expand the raw tid into
+    // "term name [tid:n]".
+    $tid = $element['#default_value'];
+    if (!empty($tid)) {
+      $query = db_select('taxonomy_term_data', 't');
+      $query->addField('t', 'name');
+      $query->addTag('term_access');
+      $query->condition('t.tid', $tid)
+        ->range(0, 1);
+      $result = $query->execute();
+      $value = $result->fetchField();
+      $value .= ' [tid:' . $tid . ']';
+      return $value;
+    }
+  }
+}
+
+/**
+ * Validation callback for a term_reference_autocreate element.
+ */
+function term_reference_autocreate_validate($element, &$form_state, $form) {
+  $field = field_widget_field($element, $form_state);
+  $instance = field_widget_instance($element, $form_state);
+
+  $value = $element['#value'];
+  $tid = NULL;
+
+  if (!empty($value)) {
+    // Check whether we have an explicit "[tid:n]" input.
+    preg_match('/^(?:\s*|(.*) )?\[\s*tid\s*:\s*(\d+)\s*\]$/', $value, $matches);
+    if (!empty($matches)) {
+      // Explicit tid. Check that the 'name' part matches the actual name for
+      // the tid.
+      list(, $name, $tid) = $matches;
+      if (!empty($name)) {
+        $real_name = db_select('taxonomy_term_data', 't')
+          ->fields('t', array('name'))
+          ->condition('t.tid', $tid)
+          ->execute()
+          ->fetchField();
+        if (trim($name) != trim($real_name)) {
+          form_error($element, t('%name: name mismatch. Please check your selection.', array('%name' => $instance['label'])));
+        }
+      }
+    }
+    else {
+      // No explicit tid (the submitted value was not populated by autocomplete
+      // selection). Get the tid of a referencable term from the entered name.
+      $options = array(
+        'string' => $value,
+        'match' => 'equals',
+        'limit' => 1,
+      );
+      $references = term_reference_autocreate_potential_references($field, $options);
+      if ($references) {
+        // @todo The best thing would be to present the user with an
+        // additional form, allowing the user to choose between valid
+        // candidates with the same title. ATM, we pick the first
+        // matching candidate...
+        $tid = key($references);
+      }
+      else {
+        $vocab = taxonomy_vocabulary_machine_name_load($field['settings']['allowed_values'][0]['vocabulary']);
+        $term = (object) array(
+          'name' => $value,
+          'vid' => $vocab->vid,
+        );
+        taxonomy_term_save($term);
+        $tid = $term->tid;
+      }
+    }
+  }
+
+  // Set the element's value as the term tid that was extracted from the entered
+  // input.
+  form_set_value($element, $tid, $form_state);
+}
+
+/**
+ * Menu callback for the autocomplete results.
+ */
+function term_reference_autocreate_autocomplete($entity_type, $bundle, $field_name, $string = '') {
+  $field = field_info_field($field_name);
+  $instance = field_info_instance($entity_type, $field_name, $bundle);
+
+  $options = array(
+    'string' => $string,
+    'match' => $instance['widget']['settings']['autocomplete_match'],
+    'limit' => 10,
+  );
+  $references = term_reference_autocreate_potential_references($field, $options);
+
+  $matches = array();
+  foreach ($references as $id => $row) {
+    // Add a class wrapper for a few required CSS overrides.
+    $matches[$row['name'] . " [tid:$id]"] = '<div class="reference-autocomplete">' . $row['rendered'] . '</div>';
+  }
+
+  drupal_json_output($matches);
+}
+
+/**
+ * Retrieves an array of candidate referenceable terms.
+ *
+ * This info is used in various places (allowed values, autocomplete
+ * results, input validation...). Some of them only need the tids,
+ * others tid + names, others yet tid + names + rendered row (for
+ * display in widgets).
+ *
+ * The array we return contains all the potentially needed information,
+ * and lets consumers use the parts they actually need.
+ *
+ * @param array $field
+ *   The field definition.
+ * @param array $options
+ *   An array of options to limit the scope of the returned list. The following
+ *   key/value pairs are accepted:
+ *   - string: string to filter titles on (used by autocomplete).
+ *   - match: operator to match the above string against, can be any of:
+ *     'contains', 'equals', 'starts_with'. Defaults to 'contains'.
+ *   - ids: array of specific term ids to lookup.
+ *   - limit: maximum size of the the result set. Defaults to 0 (no limit).
+ *
+ * @return array
+ *   An array of valid terms in the form:
+ *   array(
+ *     tid => array(
+ *       'name' => The term name,
+ *       'rendered' => The text to display in widgets (can be HTML)
+ *     ),
+ *     ...
+ *   )
+ */
+function term_reference_autocreate_potential_references($field = array(), $options = array()) {
+  // Fill in default options.
+  $options += array(
+    'string' => '',
+    'match' => 'contains',
+    'ids' => array(),
+    'limit' => 0,
+  );
+
+  $results = &drupal_static(__FUNCTION__, array());
+
+  // Create unique id for static cache.
+  $cid = $field['field_name'] . ':' . $options['match'] . ':'
+    . ($options['string'] !== '' ? $options['string'] : implode('-', $options['ids']))
+    . ':' . $options['limit'];
+  if (!isset($results[$cid])) {
+    $references = _term_reference_autocreate_potential_references_standard($field, $options);
+
+    // Store the results.
+    $results[$cid] = !empty($references) ? $references : array();
+  }
+
+  return $results[$cid];
+}
+
+/**
+ * Helper function for term_reference_autocreate_potential_references().
+ *
+ * List of referenceable names.
+ */
+function _term_reference_autocreate_potential_references_standard($field, $options) {
+  // Avoid useless work.
+  if (empty($field['settings']['allowed_values'][0]['vocabulary'])) {
+    return array();
+  }
+
+  $query = db_select('taxonomy_term_data', 't');
+  $query->addField('t', 'tid');
+  $term_name_alias = $query->addField('t', 'name', 'term_name');
+  $query->addTag('term_access')
+    ->addMetaData('id', ' _term_reference_autocomplete_potential_references_standard')
+    ->addMetaData('field', $field)
+    ->addMetaData('options', $options);
+
+  if (!empty($field['settings']['allowed_values'][0]['vocabulary'])) {
+    $vocab = taxonomy_vocabulary_machine_name_load($field['settings']['allowed_values'][0]['vocabulary']);
+    $query->condition('t.vid', $vocab->vid);
+  }
+  if (!empty($field['settings']['allowed_values'][0]['parent'])) {
+    $query->join('taxonomy_term_hierarchy', 'h', 't.tid = h.tid');
+    $query->condition('h.parent', $field['settings']['allowed_values'][0]['parent']);
+  }
+
+  if ($options['string'] !== '') {
+    switch ($options['match']) {
+      case 'contains':
+        $query->condition('t.name', '%' . db_like($options['string']) . '%', 'LIKE');
+        break;
+
+      case 'starts_with':
+        $query->condition('t.name', db_like($options['string']) . '%', 'LIKE');
+        break;
+
+      case 'equals':
+      default:
+        // No match type or incorrect match type: use "=".
+        $query->condition('t.name', $options['string']);
+        break;
+    }
+  }
+
+  if ($options['ids']) {
+    $query->condition('t.tid', $options['ids'], 'IN');
+  }
+
+  if ($options['limit']) {
+    $query->range(0, $options['limit']);
+  }
+
+  $query->orderBy($term_name_alias);
+
+  $result = $query->execute()->fetchAll();
+  $references = array();
+  foreach ($result as $term) {
+    $references[$term->tid] = array(
+      'name'    => $term->term_name,
+      'rendered' => check_plain($term->term_name),
+    );
+  }
+  return $references;
+}

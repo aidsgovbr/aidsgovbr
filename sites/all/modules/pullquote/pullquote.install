@@ -1,0 +1,23 @@
+<?php
+
+/**
+ * @file
+ * Handles installation and cleanup for the Pullquote module.
+ */
+
+/**
+ * Implements hook_uninstall().
+ */
+function pullquote_uninstall() {
+  // Just clean up all our set variables.
+  variable_del('pullquote_css');
+  variable_del('pullquote_css_selection');
+  variable_del('pullquote_css_path');
+  variable_del('pullquote_css_source');
+  variable_del('pullquote_content_by_type');
+  variable_del('pullquote_content_setting');
+  variable_del('pullquote_content_types');
+  variable_del('pullquote_load_by_view_mode');
+  variable_del('pullquote_scope');
+  variable_del('pullquote_view_modes');
+}

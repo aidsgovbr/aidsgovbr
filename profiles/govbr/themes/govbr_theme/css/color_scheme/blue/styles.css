@@ -1,0 +1,106 @@
+#header {
+  background-color: #2160bd;
+  background-image: -webkit-linear-gradient(top, #2160bd, #3a72bc);
+  background-image: linear-gradient(to bottom, #2160bd, #3a72bc);
+}
+#header a {
+  color: #ffffff;
+}
+#header .social .fa:hover:before {
+  color: #dcecff;
+}
+#header .header-top .shortcuts a {
+  color: #dcecff;
+}
+#header .header-top .shortcuts a:hover {
+  color: #aed3ff;
+}
+#header .header-top .shortcuts li span {
+  background-color: #dcecff;
+  color: #2160bd;
+}
+#header .header-top .shortcuts li:hover span {
+  background-color: #aed3ff;
+}
+#header .header-top .accessibility {
+  border-color: #dcecff !important;
+}
+#header .header-top .accessibility a {
+  color: #dcecff;
+}
+#header .header-top .accessibility a:hover {
+  color: #aed3ff;
+}
+#header .search-form .btn-default {
+  color: #0e4097;
+}
+.breadcrumb a {
+  color: #2c66ce;
+}
+#navbar {
+  background-color: #0e4097;
+}
+#navbar a {
+  color: #ffffff;
+}
+#navbar .menu.secondary li {
+  border-color: #ffffff;
+}
+.navbar-toggle .icon-bar {
+  background: #ffffff;
+}
+.navbar-toggle h4 {
+  color: #ffffff;
+  text-transform: uppercase;
+}
+.navbar-toggle {
+  border-color: #ffffff;
+  background-image: linear-gradient(to bottom, #ffffff, #e6e6e6);
+}
+.footer {
+  background-color: #1659bf;
+  color: #ffffff;
+}
+.footer .block .content a {
+  color: #ffffff;
+}
+.footer .block .content a:hover,
+.footer .block .content a:focus {
+  color: #dcecff;
+}
+.footer .block-title {
+  color: #ffffff;
+}
+#footer-brasil {
+  background-color: #0042b2;
+}
+.footer-column .block {
+  border-color: #8bacdf;
+}
+.region-sidebar-first .block-title {
+  color: #2c66ce;
+  border-top: 4px solid #2c66ce;
+}
+.region-sidebar-first .block-no-title li a {
+  color: #2c66ce;
+}
+.region-sidebar-first .active {
+  border-color: #2c66ce;
+}
+.font-govbr:before {
+  color: #165abf;
+}
+.font-govbr:hover:before {
+  color: #0e3987;
+}
+.font-govbr-square:before {
+  background: #165abf;
+}
+.font-govbr-square:hover:before {
+  background: #0e3987;
+}
+@media (max-width: 768px) {
+  #sidebar-first-menu {
+    background-color: #1659bf;
+  }
+}

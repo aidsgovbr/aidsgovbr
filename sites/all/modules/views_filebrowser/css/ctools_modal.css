@@ -1,0 +1,305 @@
+.modal-views-filebrowser {
+  font-size: 13px;
+  font-family: 'Lucida Grande', 'Lucida Sans Unicode', sans-serif;
+  background: #eaeaea;
+  border: 1px solid #b2b2b2;
+  border-bottom-color: #999;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  -moz-box-shadow: 0 0 3px rgba(0, 0, 0, .15);
+  -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, .15);
+  box-shadow: 0 0 3px rgba(0, 0, 0, .15);
+  box-sizing: content-box;
+}
+.modal-views-filebrowser .ctools-modal-content,
+.modal-views-filebrowser .ctools-modal-content .modal-content {
+  padding: 0;
+  margin: 0;
+  border: none;
+  overflow: hidden;
+}
+.modal-views-filebrowser .messages {
+  clear: both;
+}
+.modal-views-filebrowser .views-exposed-form {
+  background: #cfd1cf;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#f5f5f5), to(#cfd1cf));
+  background-image: -moz-linear-gradient(top, #f5f5f5, #cfd1cf);
+  background-image: -webkit-linear-gradient(top, #f5f5f5, #cfd1cf);
+  background-image: -o-linear-gradient(top, #f5f5f5, #cfd1cf);
+  background-image: -ms-linear-gradient(top, #f5f5f5, #cfd1cf);
+  background-image: linear-gradient(top, #f5f5f5, #cfd1cf);
+  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0,startColorstr='#f5f5f5',endColorstr='#cfd1cf');
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  border-bottom: 1px solid #b2b2b2;
+  position: relative;
+  padding: 10px;
+}
+.modal-views-filebrowser #modal-buttons {
+  border-top: 1px solid #b2b2b2;
+  background: #fafafa;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#fafafa), to(#dcdcdc));
+  background-image: -moz-linear-gradient(top, #fafafa, #dcdcdc);
+  background-image: -webkit-linear-gradient(top, #fafafa, #dcdcdc);
+  background-image: -o-linear-gradient(top, #fafafa, #dcdcdc);
+  background-image: -ms-linear-gradient(top, #fafafa, #dcdcdc);
+  background-image: linear-gradient(top, #fafafa, #dcdcdc);
+  text-align: right;
+  padding: 6px 0;
+}
+#modal-buttons input,
+.modal-views-filebrowser input {
+  margin-bottom: 0;
+}
+#modal-buttons .button,
+#modal-buttons input[type=submit],
+.modal-views-filebrowser .button,
+.modal-views-filebrowser input[type=submit] {
+  display: inline;
+  cursor: pointer;
+  padding: 4px 17px;
+  margin-right: 1em;
+  color: #5a5a5a;
+  text-align: center;
+  font-weight: normal;
+  font-size: 1.077em;
+  font-family: "Lucida Grande", Verdana, sans-serif;
+  text-transform: none;
+  font-style: normal;
+  line-height: 17px;
+  border: 1px solid #999;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  background: #e6e6e6;
+  background: -moz-linear-gradient(top, #fff, #e6e6e6);
+  background: -webkit-linear-gradient(top, #fff, #e6e6e6);
+  background: -o-linear-gradient(top, #fff, #e6e6e6);
+  background: -ms-linear-gradient(top, #fff, #e6e6e6);
+  background: linear-gradient(top, #fff, #e6e6e6);
+}
+#modal-buttons .button,
+#modal-buttons input[type=submit] {
+  margin: .5em 1em .5em 0;
+}
+#modal-buttons .button:hover,
+#modal-buttons input[type=submit]:hover,
+.modal-views-filebrowser .button:hover,
+.modal-views-filebrowser input[type=submit]:hover {
+  text-decoration: none;
+}
+.modal-views-filebrowser .button.droppable-browse-button {
+  background: url(../images/upload.svg) 10px center no-repeat, #e6e6e6;
+  background: url(../images/upload.svg) 10px center no-repeat, -moz-linear-gradient(top, #fff, #e6e6e6);
+  background: url(../images/upload.svg) 10px center no-repeat, -webkit-linear-gradient(top, #fff, #e6e6e6);
+  background: url(../images/upload.svg) 10px center no-repeat, -o-linear-gradient(top, #fff, #e6e6e6);
+  background: url(../images/upload.svg) 10px center no-repeat, -ms-linear-gradient(top, #fff, #e6e6e6);
+  background: url(../images/upload.svg) 10px center no-repeat, linear-gradient(top, #fff, #e6e6e6);
+  padding-left: 37px;
+  margin-top: 1.6em;
+  display: inline-block;
+}
+.modal-views-filebrowser .button.droppable-browse-button.disabled {
+  opacity: .5;
+}
+.modal-views-filebrowser .ajax-progress .throbber {
+  display: block;
+}
+.modal-views-filebrowser .views-exposed-widgets {
+  float: right;
+  margin: 0;
+}
+.modal-views-filebrowser .views-exposed-widget {
+  padding-top: 0;
+}
+.modal-views-filebrowser .views-exposed-widget.upload-new-button {
+  margin-left: 1em;
+}
+.modal-views-filebrowser .views-exposed-widget .description {
+  font-size: .85em;
+  width: 300px;
+}
+.modal-views-filebrowser .views-exposed-form label {
+  margin: 0;
+}
+.modal-views-filebrowser .views-exposed-form .form-item {
+  padding: 9px 0;
+  margin: 0 0 10px;
+  background: none;
+  border: none;
+}
+.modal-views-filebrowser .views-exposed-form .form-type-textfield input {
+  padding: 2px;
+  border: 1px solid #ccc;
+  border-top-color: #999;
+  background: #fff;
+  color: #333;
+  height: auto;
+  width: 140px;
+  border-radius: 3px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, .15) inset;
+}
+.modal-views-filebrowser .views-exposed-form .form-type-textfield input,
+.modal-views-filebrowser .views-exposed-form .form-type-select select {
+  font-size: 11px;
+  line-height: 11px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.modal-views-filebrowser .views-exposed-form .form-type-textfield input:focus {
+  color: #000;
+  border-color: #139ff7;
+}
+.modal-views-filebrowser .views-exposed-form select {
+  padding: 2px;
+  border: 1px solid #ccc;
+  border-top-color: #999;
+  background: #fff;
+  color: #333;
+  height: auto;
+}
+.modal-views-filebrowser .views-exposed-form .views-widget-filter-filemime {
+  padding: 0;
+  display: none;
+}
+.modal-views-filebrowser .views-exposed-form .views-widget-filter-filemime input {
+  width: 0;
+}
+.modal-views-filebrowser .form-type-dragndrop-upload {
+  padding: 0;
+  margin: 0;
+}
+.modal-views-filebrowser a.close {
+  float: none;
+  position: absolute;
+  top: 5px;
+  right: 7px;
+  z-index: 10;
+}
+.modal-views-filebrowser #modal-title {
+  font-weight: bold;
+  font-size: 13px;
+  position: relative;
+  color: #474747;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, .75);
+  border-bottom: 1px solid #999;
+  padding: 6px 10px;
+  display: block;
+  -moz-border-radius: 2px 2px 0 0;
+  -webkit-border-radius: 2px 2px 0 0;
+  border-radius: 2px 2px 0 0;
+  -moz-box-shadow: 0 1px 0 #fff inset;
+  -webkit-box-shadow: 0 1px 0 #fff inset;
+  box-shadow: 0 1px 0 #fff inset;
+  background: #cfd1cf;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#f5f5f5), to(#cfd1cf));
+  background-image: -moz-linear-gradient(top, #f5f5f5, #cfd1cf);
+  background-image: -webkit-linear-gradient(top, #f5f5f5, #cfd1cf);
+  background-image: -o-linear-gradient(top, #f5f5f5, #cfd1cf);
+  background-image: -ms-linear-gradient(top, #f5f5f5, #cfd1cf);
+  background-image: linear-gradient(top, #f5f5f5, #cfd1cf);
+  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0,startColorstr='#f5f5f5',endColorstr='#cfd1cf');
+}
+.modal-views-filebrowser div.view {
+  background-color: #fff;
+}
+.modal-views-filebrowser {
+  background: #fff;
+}
+.modal-views-filebrowser table,
+.modal-views-filebrowser tr,
+.modal-views-filebrowser tr td:last-child {
+  border: 0;
+  border-right: 0;
+  margin-bottom: 0;
+}
+.modal-views-filebrowser #modal-content-target .view-content {
+  overflow: scroll;
+}
+.modal-views-filebrowser table th,
+.modal-views-filebrowser table td {
+  padding: 8px 20px;
+  vertical-align: middle;
+  border: 0;
+  font-size: 12px;
+}
+.modal-views-filebrowser thead th,
+.modal-views-filebrowser thead th.active {
+  text-transform: none;
+  color: #000;
+  border: 0;
+  background: #fafafa;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#fafafa), to(#dcdcdc));
+  background-image: -moz-linear-gradient(top, #fafafa, #dcdcdc);
+  background-image: -webkit-linear-gradient(top, #fafafa, #dcdcdc);
+  background-image: -o-linear-gradient(top, #fafafa, #dcdcdc);
+  background-image: -ms-linear-gradient(top, #fafafa, #dcdcdc);
+  background-image: linear-gradient(top, #fafafa, #dcdcdc);
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  border-bottom: 1px solid #b2b2b2;
+}
+.modal-views-filebrowser thead th a {
+  color: #000;
+}
+.modal-views-filebrowser tr td,
+.modal-views-filebrowser tr.even td,
+.modal-views-filebrowser tr.odd td,
+.modal-views-filebrowser tr.even td.active,
+.modal-views-filebrowser tr.odd td.active {
+  background-color: #fff;
+}
+.modal-views-filebrowser table td span,
+.modal-views-filebrowser table td img {
+  vertical-align: middle;
+}
+.modal-views-filebrowser table .preview {
+  margin-right: 24px;
+}
+.modal-views-filebrowser .gray-text,
+.modal-views-filebrowser td.views-field-extension,
+.modal-views-filebrowser td.views-field-timestamp {
+  color: #a6a6a6;
+}
+.modal-views-filebrowser tr.filebrowser-select td,
+.modal-views-filebrowser tr.filebrowser-select td.active {
+  background-color: #d4ecfe;
+}
+.modal-views-filebrowser .pager {
+  margin: 0;
+  height: 30px;
+  float: none;
+  clear: both;
+  text-align: center;
+  border: none;
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+.modal-views-filebrowser .pager {
+  float: none;
+  text-align: center;
+}
+.modal-views-filebrowser .pager ul.pager {
+  display: inline;
+  float: none;
+}
+.modal-views-filebrowser .pager li {
+  display: inline-block;
+  float: none;
+  margin: 0;
+  padding: 0.5em;
+}
+.modal-views-filebrowser ul.links li a {
+  float: none;
+  padding: 0;
+  color: #0074bd;
+  text-decoration: none;
+}
+.modal-views-filebrowser .pager li.pager-current {
+  background: none;
+  color: #000;
+}

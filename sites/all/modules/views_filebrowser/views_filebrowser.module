@@ -1,0 +1,639 @@
+<?php
+
+/**
+ * @file
+ * Integration of filebrowser into the field api.
+ */
+
+define('VIEWS_FILEBROWSER_VIEW_NAME', 'views_filebrowser_files');
+define('VIEWS_FILEBROWSER_DISPLAY_ID', 'block_1');
+define('VIEWS_FILEBROWSER_DEFAULT_UPLOAD_LOCATION', 'views_filebrowser');
+
+/**
+ * Implements hook_menu().
+ */
+function views_filebrowser_menu() {
+  $items['views_filebrowser/%ctools_js/%/%/%/%'] = array(
+    'title' => 'Views Filebrowse files',
+    'page arguments' => array(1, 2, 3, 4, 5),
+    'page callback' => 'views_filebrowser_page',
+    'access arguments' => array('access views filebrowser'),
+    'type' => MENU_CALLBACK,
+  );
+  return $items;
+}
+
+/**
+ * Implements hook_permission().
+ */
+function views_filebrowser_permission() {
+  return array(
+    'access views filebrowser' => array(
+      'title' => t('Access Views Filebrowser'),
+    ),
+    'administer views filebrowser' => array(
+      'title' => t('Administer Views Filebrowser'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_theme().
+ */
+function views_filebrowser_theme() {
+  $path = drupal_get_path('module', 'views_filebrowser');
+
+  return array(
+    'views_filebrowser_file_icon' => array(
+      'variables' => array(
+        'file' => NULL,
+        'path' => drupal_get_path('module', 'views_filebrowser') . '/images/filetypes',
+      ),
+    ),
+    'views_view__views_filebrowser_files' => array(
+      'template' => 'views-view--views-filebrowser-files',
+      'path' => $path . '/templates',
+      'base hook' => 'views_view',
+    ),
+    'views_exposed_form__views_filebrowser_files' => array(
+      'template' => 'views-exposed-form--views-filebrowser-files',
+      'path' => $path . '/templates',
+      'base hook' => 'views_exposed_form',
+      'render element' => 'form',
+    ),
+  );
+}
+
+
+/**
+ * Implements hook_views_api().
+ */
+function views_filebrowser_views_api($module = NULL, $api = NULL) {
+  return array('api' => '3.0');
+}
+
+/**
+ * Implements hook_admin_paths().
+ */
+function views_filebrowser_admin_paths() {
+  $paths = array(
+    'views_filebrowser/*' => TRUE,
+  );
+  return $paths;
+}
+
+/**
+ * Creates the dialog dashboard.
+ */
+function views_filebrowser_page($js, $entity_type, $field_name, $bundle_name, $name) {
+  $js = check_plain($js);
+  $entity_type = urldecode(check_plain($entity_type));
+  $field_name = urldecode(check_plain($field_name));
+  $bundle_name = urldecode(check_plain($bundle_name));
+  $name = urldecode(check_plain($name));
+  $instance = field_info_instance($entity_type, $field_name, $bundle_name);
+
+  $form_settings = array(
+    'entity_type' => $entity_type,
+    'field_name' => $field_name,
+    'bundle_name' => $bundle_name,
+  );
+
+  module_load_include('inc', 'views_filebrowser');
+  $modal = views_filebrowser_create_modal($name, 'fid', $instance['settings']['file_extensions'], $form_settings);
+
+  if ($js) {
+    // Required includes for ctools to work:
+    ctools_include('modal');
+    ctools_include('ajax');
+
+    return ctools_modal_render($modal['title'], $modal['content']);
+  }
+  return $modal['content'];
+}
+
+/**
+ * Custom callback to create the filebrowser modal.
+ */
+function views_filebrowser_create_modal($name, $target_type = 'fid', $extensions = array(), $form_settings = array()) {
+  $view = views_get_view(VIEWS_FILEBROWSER_VIEW_NAME);
+  $view->set_display(VIEWS_FILEBROWSER_DISPLAY_ID);
+
+  // Add filter on mimetype to view.
+  $view->exposed_input['filemime'] = NULL;
+  if (!empty($extensions)) {
+    $mimetypes = array();
+
+    include_once DRUPAL_ROOT . '/includes/file.mimetypes.inc';
+    $mapping = file_mimetype_mapping();
+    $mapping_types = $mapping['mimetypes'];
+
+    $extensions = explode(' ', $extensions);
+
+    foreach ($extensions as $extension) {
+      if (!empty($mapping['extensions'][$extension])
+        && !empty($mapping_types[$mapping['extensions'][$extension]])) {
+
+        $mimetype = $mapping_types[$mapping['extensions'][$extension]];
+        $mimetypes[] = addcslashes($mimetype, '+');
+      }
+    }
+
+    $view->exposed_input['filemime'] = implode('|', $mimetypes);
+  }
+
+  $content = array(
+    'upload' => array(
+      '#prefix' => '<div id="modal-content-upload" class="element-invisible"'
+      . ' data-target-name="' . $name . '">',
+      '#suffix' => '</div>',
+      'form' => drupal_get_form('views_filebrowser_default_upload_form', $form_settings),
+    ),
+    'files' => array(
+      '#prefix' => '<div id="modal-content-target" data-target-name="' . $name . '" data-target-type="' . $target_type . '">',
+      '#suffix' => '</div>',
+      '#markup' => $view->preview(VIEWS_FILEBROWSER_DISPLAY_ID),
+    ),
+  );
+  $title = $view->display[VIEWS_FILEBROWSER_DISPLAY_ID]->display_title;
+
+  drupal_alter('views_filebrowser_page', $title, $content);
+
+  return array(
+    'title' => $title,
+    'content' => $content,
+  );
+}
+
+/**
+ * Implements hook_field_info_alter().
+ */
+function views_filebrowser_field_info_alter(&$info) {
+  // Add a setting to all field types.
+  foreach ($info as $field_type => $field_type_info) {
+    if (in_array($field_type, array('file', 'image'))) {
+      $info[$field_type]['instance_settings'] += array(
+        'views_filebrowser' => 0,
+      );
+    }
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function views_filebrowser_form_alter(&$form, $form_state, $form_id) {
+  if (isset($form['#node']) && $form_id == $form['#node']->type . '_node_form') {
+    // Moxicode needs a form name attribute.
+    $form['#attributes']['name'] = str_replace('-', '_', $form['#id']);
+  }
+  if ($form_id == 'field_ui_field_edit_form'
+    && isset($form['#instance']['settings']['views_filebrowser'])) {
+    $form['instance']['settings']['views_filebrowser'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Enable Views Filebrowser'),
+      '#description' => t('Enable Views Filebrowser in order to allow users to re-use already uploaded files by navigation trough the files.'),
+      '#default_value' => $form['#instance']['settings']['views_filebrowser'],
+      '#access' => user_access('administer views filebrowser'),
+      '#weight' => 9,
+    );
+  }
+}
+
+/**
+ * Implements hook_field_widget_form_alter().
+ */
+function views_filebrowser_field_widget_form_alter(&$element, &$form_state, $context) {
+  if (!empty($context['instance']['settings']['views_filebrowser'])) {
+    foreach (element_children($element) as $delta) {
+      $element[$delta]['#process'][] = 'views_filebrowser_widget_process';
+    }
+  }
+}
+
+/**
+ * Implements hook_widget_process().
+ */
+function views_filebrowser_widget_process($element, &$form_state, $form) {
+  $item = $element['#value'];
+
+  $element['filemanager'] = array(
+    '#type' => 'container',
+    '#access' => (empty($item['fid']) && user_access('access views filebrowser')),
+  );
+
+  $element['filemanager']['path'] = array(
+    '#title' => t('File/URL'),
+    '#type' => 'textfield',
+    '#default_value' => '',
+    '#attributes' => array('class' => array('filemanager-path')),
+  );
+  $element['filemanager']['new-fid'] = array(
+    '#type' => 'hidden',
+    '#default_value' => '',
+  );
+
+  $element['filemanager']['select'] = array(
+    '#type' => 'submit',
+    '#value' => t('Select'),
+    '#field_name' => $element['#field_name'],
+    '#name' => implode('_', $element['#parents']) . '_select_button',
+    '#weight' => 101,
+    '#attributes' => array('class' => array('views-filebrowser-opener')),
+    '#validate' => array(),
+    '#submit' => array('views_filebrowser_filemanager_select'),
+    '#limit_validation_errors' => array($element['#parents']),
+    '#ajax' => array(
+      'path' => $element['upload_button']['#ajax']['path'],
+      'wrapper' => $element['upload_button']['#ajax']['wrapper'],
+      'effect' => 'fade',
+      'progress' => $element['upload_button']['#ajax']['progress'],
+    ),
+  );
+
+  $element['filemanager']['filefield_opener_active_tab'] = array(
+    '#type' => 'hidden',
+    '#default_value' => 0,
+  );
+
+  _views_filebrowser_ctools_modal_attach();
+
+  $href = 'views_filebrowser/nojs/' . $element['#entity_type'];
+  $href .= '/' . urlencode($element['#field_name']);
+  $href .= '/' . urlencode($element['#bundle']);
+  $href .= '/' . urlencode($element['#name']);
+
+  $ctools_link = ctools_modal_text_button(t('Browse'), $href, t('Open filebrowser for field @field', array('@name' => $element['#field_name'])), 'ctools-modal-views-filebrowser-modal-style');
+
+  $element['filemanager']['path']['#field_suffix'] = $ctools_link;
+
+  $module_path = drupal_get_path('module', 'views_filebrowser');
+
+  $element['filemanager']['#attached'] = array(
+    'css' => array(
+      $module_path . '/css/views_filebrowser.css',
+    ),
+    'js' => array(
+      $module_path . '/js/views_filebrowser.js' => array(
+        'preprocess' => FALSE,
+      ),
+    ),
+  );
+
+  $element['#element_validate'] = array(
+    'views_filebrowser_file_validate',
+    'views_filebrowser_file_validate_file',
+  );
+
+  return $element;
+}
+
+/**
+ * An #element_validate callback for the managed_file element.
+ */
+function views_filebrowser_file_validate_file(&$element, &$form_state) {
+  // If referencing an existing file, only allow if there are existing
+  // references. This prevents unmanaged files from being deleted if this
+  // item were to be deleted.
+  $clicked_button = end($form_state['triggering_element']['#parents']);
+  if ($clicked_button != 'remove_button' && !empty($element['fid']['#value'])) {
+    if ($file = file_load($element['fid']['#value'])) {
+      if ($file->status == FILE_STATUS_PERMANENT) {
+        $references = file_usage_list($file);
+        if (empty($references)) {
+          form_error($element, t('The file used in the !name field may not be referenced.', array('!name' => $element['#title'])));
+        }
+      }
+    }
+    else {
+      form_error($element, t('The file referenced by the !name field does not exist.', array('!name' => $element['#title'])));
+    }
+  }
+
+  // Check required property based on the FID.
+  if ($element['#required'] && !in_array($clicked_button, array('upload_button', 'remove_button'))) {
+    if (empty($element['fid']['#value']) && empty($element['filemanager']['new-fid']['#value'])) {
+      form_error($element['upload'], t('!name field is required.', array('!name' => $element['#title'])));
+    }
+  }
+
+  // Consolidate the array value of this field to a single FID.
+  if (!$element['#extended']) {
+    form_set_value($element, $element['fid']['#value'], $form_state);
+  }
+}
+
+/**
+ * Implements hook_js_alter().
+ */
+function views_filebrowser_js_alter(&$javascript) {
+  // Make sure our script is added last so no other scripts can overwrite our
+  // events.
+  $path = drupal_get_path('module', 'views_filebrowser');
+  if (isset($javascript[$path . '/js/ctools_modal.js'])) {
+    $javascript[$path . '/js/ctools_modal.js']['weight'] = 100;
+  }
+}
+
+/**
+ * Function to attach the ctools modal.
+ */
+function _views_filebrowser_ctools_modal_attach() {
+  // Include the CTools tools that we need.
+  ctools_include('ajax');
+  ctools_include('modal');
+  // Add CTools' javascript to the page.
+  ctools_modal_add_js();
+  ctools_add_css('ctools_modal', 'views_filebrowser');
+  ctools_add_js('ctools_modal', 'views_filebrowser');
+
+  // Create our own javascript that will be used to theme a modal.
+  $filebrowser_style = array(
+    'views-filebrowser-modal-style' => array(
+      'modalSize' => array(
+        'type' => 'scale',
+        'width' => .8,
+        'height' => .75,
+        'contentRight' => 0,
+        'contentBottom' => -5,
+        'addHeight' => 33,
+      ),
+      'modalClass' => 'views-filebrowser',
+      'modalOptions' => array(
+        'opacity' => .5,
+        'background-color' => '#fff',
+      ),
+      'animation' => 'fadeIn',
+      'modalTheme' => 'views_filebrowser_filemanager',
+      'closeImage' => theme('image', array(
+        'path' => ctools_image_path('close.png', 'views_filebrowser'),
+        'alt' => t('Close window'),
+        'title' => t('Close window'),
+      )),
+    ),
+  );
+  // Add the settings array defined above to Drupal 7's JS settings:
+  drupal_add_js($filebrowser_style, 'setting');
+}
+
+/**
+ * Implements hook_element_info_alter().
+ */
+function views_filebrowser_element_info_alter(&$type) {
+  // Decrease the default size of textfields.
+  if (isset($type['managed_file'])) {
+    array_unshift($type['managed_file']['#element_validate'], 'views_filebrowser_file_validate');
+  }
+}
+
+/**
+ * Validate function for filefield file.
+ */
+function views_filebrowser_file_validate($element, &$form_state = array()) {
+  if (is_array($element) && !empty($element['filemanager'])) {
+    $clicked_button = end($form_state['triggering_element']['#parents']);
+    if ($clicked_button != 'remove_button' && !empty($element['fid']['#value'])) {
+      if ($file = file_load($element['fid']['#value'])) {
+        if ($file->status == FILE_STATUS_PERMANENT) {
+          $references = file_usage_list($file);
+          if (empty($references)) {
+            // Save temporary the file status to null because the file hasn't an
+            // reference. After the validate the file get the status permanent.
+            $file->status = NULL;
+            file_save($file);
+          }
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Add tabs to field to select an file.
+ */
+function views_filebrowser_filemanager_select($form, &$form_state) {
+  $parents = array_slice($form_state['triggering_element']['#array_parents'], 0, -3);
+  $element = drupal_array_get_nested_value($form, $parents);
+  $field_name = $element['#field_name'];
+  $langcode = $element['#language'];
+
+  $field_state = field_form_get_state($element['#field_parents'], $field_name, $langcode, $form_state);
+  $field_values = drupal_array_get_nested_value($form_state['values'], $parents);
+
+  // Get the old values.
+  $old_values = drupal_array_get_nested_value($form_state['input'], $parents);
+  $field_values = array_replace($old_values, $field_values);
+
+  if (isset($field_values) && isset($field_state['items'])) {
+    $field_values += $field_state['items'];
+  }
+  elseif (isset($field_state['items'])) {
+    $field_values = $field_state['items'];
+  }
+
+  if (isset($field_values)) {
+    // Update sort order according to weight. Note that this is always stored in
+    // form state. Sort does not work using regular upload, but that is a core
+    // bug.
+    usort($field_values, '_field_sort_items_helper');
+
+    foreach ($field_values as &$field_value) {
+      if (!$field_value['fid']) {
+        if (!empty($field_value['filemanager']['path'])) {
+          $filename = $field_value['filemanager']['path'];
+          $uri_scheme = $field_state['field']['settings']['uri_scheme'];
+          $file_stream_wrapper = file_stream_wrapper_get_instance_by_scheme($uri_scheme);
+          $stream_wrapper_uri = $file_stream_wrapper->getUri();
+          $directory_path = $file_stream_wrapper->getDirectoryPath();
+          if (strpos($filename, $directory_path) === 0) {
+            $file_uri = $stream_wrapper_uri . substr($filename, strlen($directory_path) + 1);
+            if ($files = file_load_multiple(array(), array('uri' => $file_uri))) {
+              $file = reset($files);
+            }
+            else {
+              $pathinfo = pathinfo($file_uri);
+              $file = new stdClass();
+              $file->uid = $GLOBALS['user']->uid;
+              $file->status = 1;
+              $file->filename = $pathinfo['basename'];
+              $file->uri = $file_uri;
+              file_save($file);
+              file_usage_add($file, 'filefield_filemanager', $element['#entity_type'], $file->fid);
+            }
+            $field_value['fid'] = $file->fid;
+          }
+        }
+        elseif (!empty($field_value['filemanager']['new-fid'])) {
+          $file = file_load($field_value['filemanager']['new-fid']);
+          $field_value['fid'] = $file->fid;
+        }
+      }
+    }
+
+    // Update form_state values.
+    drupal_array_set_nested_value($form_state['values'], $parents, $field_values);
+
+    // Update items.
+    $field_state['items'] = $field_values;
+    field_form_set_state($element['#field_parents'], $field_name, $langcode, $form_state, $field_state);
+  }
+
+  // Clear out input as it will need to be rebuildt.
+  drupal_array_set_nested_value($form_state['input'], $element['#parents'], NULL);
+  $form_state['rebuild'] = TRUE;
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function views_filebrowser_form_views_exposed_form_alter(&$form, $form_state) {
+  if ($form_state['view']->name) {
+    // Set settings on filemime field.
+    if (!empty($form['filemime'])) {
+      $form['filemime']['#maxlength'] = 2048;
+      $form['filemime']['#attributes']['class'][] = 'element-hidden';
+    }
+
+    // We need to create a button instead of a link here because of the
+    // accessibility guidelines. Regretfully Views won't let us use FAPI here to
+    // create a regular submit button since it will overwrite the onclick
+    // behavior in attachExposedFormAjax.
+    // @see Drupal.views.ajaxView.prototype.attachExposedFormAjax in
+    // ajax_view.js:82.
+    $button_value = t('Upload a new file');
+    $form['upload_new'] = array(
+      '#markup' => '<input type="button" value="' . $button_value . '" class="droppable-browse-button button" />',
+    );
+    hide($form['upload_new']);
+
+    if (!empty($form['uid'])) {
+      $form['uid']['#description'] = NULL;
+    }
+  }
+}
+
+/**
+ * Form callback for default upload form.
+ */
+function views_filebrowser_default_upload_form($form, &$form_state) {
+  $form['filefield_modal_file'] = array();
+
+  if (!empty($form_state['build_info']['args'][0])) {
+    $form_settings = $form_state['build_info']['args'][0];
+
+    $field = field_info_field($form_settings['field_name']);
+    $instance = field_info_instance($form_settings['entity_type'], $form_settings['field_name'], $form_settings['bundle_name']);
+
+    $form['filefield_modal_file'] += array(
+      '#title' => $instance['label'],
+      '#description' => theme('file_upload_help', array(
+        'description' => $instance['description'],
+        'upload_validators' => file_field_widget_upload_validators($field, $instance),
+      )),
+      '#upload_location' => file_field_widget_uri($field, $instance),
+      '#upload_validators' => file_field_widget_upload_validators($field, $instance),
+    );
+  }
+
+  $form['filefield_modal_file'] += array(
+    '#title' => t('File'),
+    '#type' => 'managed_file',
+    '#upload_location' => file_default_scheme() . '://' . VIEWS_FILEBROWSER_DEFAULT_UPLOAD_LOCATION,
+    '#upload_validators' => array(),
+  );
+
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Save file'),
+  );
+
+  return $form;
+}
+
+/**
+ * Implements hook_image_default_styles().
+ */
+function views_filebrowser_image_default_styles() {
+  $styles = array();
+
+  $styles['views_slideshow_thumbnail'] = array(
+    'label' => 'Views Filebrowser thumbnail',
+    'effects' => array(
+      array(
+        'name' => 'image_scale_and_crop',
+        'data' => array(
+          'width' => 28,
+          'height' => 23,
+          'upscale' => 1,
+        ),
+        'weight' => 0,
+      ),
+    ),
+  );
+
+  return $styles;
+}
+
+/**
+ * Returns HTML for an image with an appropriate icon for the given file.
+ *
+ * @param array $variables
+ *   An associative array containing:
+ *   - file: A file object for which to make an icon.
+ *   - path: The path to the file icon files.
+ *
+ * @ingroup themeable
+ */
+function theme_views_filebrowser_file_icon(array $variables) {
+  $image_variables = array();
+  $file = $variables['file'];
+  $mime = check_plain($file->filemime);
+
+  $image_variables['path'] = $variables['path'] . '/file.png';
+
+  $icon = str_replace('/', '-', $mime);
+  $icon = str_replace('\\', '-', $icon);
+  $mimepart = substr($icon, 0, strpos($icon, '-'));
+
+  // If icon exists.
+  if (file_exists($variables['path'] . '/' . $icon . '.svg')) {
+    $image_variables['path'] = $variables['path'] . '/' . $icon . '.svg';
+  }
+  elseif (file_exists($variables['path'] . '/' . $mimepart . '.svg')) {
+    $image_variables['path'] = $variables['path'] . '/' . $mimepart . '.svg';
+  }
+
+  $image_variables['title'] = $image_variables['alt'] = $mime;
+
+  return theme('image', $image_variables);
+}
+
+/**
+ * Implements hook_help().
+ */
+function views_filebrowser_help($path, $arg) {
+  switch ($path) {
+    case 'admin/help#views_filebrowser':
+      $filepath = dirname(__FILE__) . '/README.md';
+      if (file_exists($filepath)) {
+        $readme = file_get_contents($filepath);
+      }
+
+      if (module_exists('markdown')) {
+        $filters = module_invoke('markdown', 'filter_info');
+        $info = $filters['filter_markdown'];
+
+        if (function_exists($info['process callback'])) {
+          $output = $info['process callback']($readme, NULL);
+        }
+        else {
+          $output = '<pre>' . $readme . '</pre>';
+        }
+      }
+      else {
+        $output = '<pre>' . $readme . '</pre>';
+      }
+
+      return $output;
+  }
+}

@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the GovBR Core feature.
+ */
+
+include_once 'govbr_core.features.inc';

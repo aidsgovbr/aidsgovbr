@@ -1,0 +1,156 @@
+<?php
+
+/**
+ * @file
+ * Module file for the CKEditor File Browser module.
+ */
+
+/**
+ * Implements hook_permission().
+ */
+function views_filebrowser_ckeditor_permission() {
+  return array(
+    'access views filebrowser ckeditor' => array(
+      'title' => t('Access Views Filebrowser CKEditor'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_menu().
+ */
+function views_filebrowser_ckeditor_menu() {
+  $items['views_filebrowser_ckeditor'] = array(
+    'delivery callback' => 'ajax_deliver',
+    'page callback' => 'views_filebrowser_ckeditor_page',
+    'access arguments' => array('access views filebrowser ckeditor'),
+    'theme callback' => 'views_filebrowser_ckeditor_ajax_theme',
+    'type' => MENU_CALLBACK,
+  );
+  return $items;
+}
+
+/**
+ * Implements hook_ckeditor_settings_alter().
+ */
+function views_filebrowser_ckeditor_ckeditor_settings_alter(&$settings, $conf) {
+  global $theme;
+  $_SESSION['views_filebrowser_theme'] = $theme;
+}
+
+/**
+ * Custom theme callback for views filebrowser.
+ */
+function views_filebrowser_ckeditor_ajax_theme() {
+  if (!empty($_SESSION['views_filebrowser_theme'])) {
+    return $_SESSION['views_filebrowser_theme'];
+  }
+  else {
+    return ajax_base_page_theme();
+  }
+}
+
+/**
+ * Creates the dialog dashboard.
+ */
+function views_filebrowser_ckeditor_page() {
+  $target = !empty($_GET['target']) ? check_plain($_GET['target']) : NULL;
+  $extensions = array();
+  $image_types = array('image', 'image2');
+
+  if (in_array($target, $image_types)) {
+    $extensions = array(
+      'jpg',
+      'png',
+      'jpeg',
+      'gif',
+      'svg',
+    );
+  }
+
+  drupal_alter('views_filebrowser_ckeditor_extensions', $extensions, $target);
+
+  $modal = views_filebrowser_create_modal('ckeditor', 'path', implode(' ', $extensions));
+
+  $return = array(
+    '#type' => 'ajax',
+    '#commands' => array(
+      ajax_command_html('#modal-title', $modal['title']),
+      ajax_command_html('#modal-content', drupal_render($modal['content'])),
+    ),
+  );
+  return $return;
+}
+
+/**
+ * Implements hook_element_info_alter().
+ */
+function views_filebrowser_ckeditor_element_info_alter(&$types) {
+  $types['text_format']['#pre_render'][] = 'views_filebrowser_ckeditor_pre_render_text_format';
+}
+
+/**
+ * Pre render callback to add js and css files and load the ctools modal.
+ */
+function views_filebrowser_ckeditor_pre_render_text_format($element) {
+  $profile = ckeditor_get_profile($element['#format']);
+  if (!empty($profile->settings['loadPlugins']['views_filebrowser_ckeditor'])) {
+    $path = drupal_get_path('module', 'views_filebrowser_ckeditor');
+
+    $element['#attached']['library'][] = array('system', 'drupal.ajax');
+    $element['#attached']['library'][] = array('system', 'jquery.form');
+    $element['#attached']['js'][] = $path . '/js/views_filebrowser_ckeditor.js';
+
+    _views_filebrowser_ctools_modal_attach();
+  }
+  return $element;
+}
+
+/**
+ * Implements hook_ckeditor_plugin().
+ */
+function views_filebrowser_ckeditor_ckeditor_plugin() {
+  $plugin = array();
+  $module_path = drupal_get_path('module', 'views_filebrowser_ckeditor');
+
+  $plugin['views_filebrowser_ckeditor'] = array(
+    'name' => 'views_filebrowser_ckeditor',
+    'desc' => t('Plugin for the Views Filebrowser'),
+    'path' => $module_path . '/ckeditor_plugins/views_filebrowser_ckeditor/',
+  );
+  return $plugin;
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function views_filebrowser_ckeditor_form_views_filebrowser_default_upload_form_alter(&$form, $form_state) {
+
+  // If args are empty the form loaded from ckeditor.
+  if (empty($form_state['build_info']['args'][0])) {
+    $form['#submit'][] = 'views_filebrowser_ckeditor_filebrowser_file_submit';
+  }
+}
+
+/**
+ * Custom callback to save the file as permanent.
+ */
+function views_filebrowser_ckeditor_filebrowser_file_submit($form, &$form_state) {
+  $fid = NULL;
+
+  if (!empty($form_state['values']['filefield_modal_file'])) {
+    $fid = $form_state['values']['filefield_modal_file'];
+  }
+  elseif (!empty($form_state['values']['dnd'])) {
+    $fid = $form_state['values']['dnd'];
+  }
+
+  if (!empty($fid)) {
+    $file = file_load($fid);
+
+    $file->status = FILE_STATUS_PERMANENT;
+    file_save($file);
+
+    file_usage_add($file, 'views_filebrowser', 'ckeditor', $file->fid);
+  }
+}

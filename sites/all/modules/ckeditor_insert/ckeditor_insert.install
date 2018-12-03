@@ -1,0 +1,29 @@
+<?php
+
+/**
+ * Rename variable and convet it to array.
+ */
+function ckeditor_insert_update_7001() {
+  $names = [
+    'ckeditor_insert_file_field',
+    'ckeditor_insert_image_field',
+  ];
+  foreach ($names as $name) {
+    $current_value = variable_get($name, []);
+    if (!empty($current_value)) {
+      variable_set($name . 's', [$current_value]);
+    }
+    else {
+      variable_set($name . 's', []);
+    }
+    variable_del($name);
+  }
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function ckeditor_insert_uninstall() {
+  variable_del('ckeditor_insert_file_field');
+  variable_del('ckeditor_insert_image_field');
+}

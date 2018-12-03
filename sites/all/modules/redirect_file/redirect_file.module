@@ -1,0 +1,74 @@
+<?php
+
+/**
+ * @file
+ * This module provides support for redirecting public files.
+ */
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function redirect_file_form_redirect_edit_form_alter(&$form, &$form_state) {
+  $form['advanced']['move_existing_file'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Rename existing source file'),
+    '#description' => t('Enabling this checkbox will cause the source file to be renamed if it exists. This will make it permanently inaccessible at the original URL. You must check this box in order to redirect binary files.'),
+    '#default_value' => FALSE,
+  );
+
+  $form['#submit'][] = 'redirect_file_submit';
+}
+
+/**
+ * Submit handler for redirect_edit_form.
+ */
+function redirect_file_submit($form, &$form_state) {
+
+  if (!$form_state['values']['move_existing_file']) {
+    return FALSE;
+  }
+
+  $source = $form_state['values']['source'];
+  $public_file_path = variable_get('file_public_path', 'sites/default/files');
+
+  // Only move source file if it is in the 'public://' file directory.
+  if (strstr($source, $public_file_path) !== FALSE) {
+    $file_default_scheme = file_default_scheme() . "://";
+    $source_path = str_replace($public_file_path . '/', $file_default_scheme, $source);
+    $file = redirect_file_load_file_by_url($source_path);
+
+    if ($file) {
+      // Rename the managed file.
+      file_move($file, $file->uri);
+    }
+    else if (file_exists($source_path)) {
+      // Rename the unmanaged file.
+      file_unmanaged_move($source_path, $source_path);
+    }
+  }
+}
+
+/**
+ * Loads a managed file entity by url path.
+ *
+ * @param string $url
+ *   The url of the file.
+ *
+ * @return bool|obj
+ *   The file object, or FALSE if none was found.
+ */
+function redirect_file_load_file_by_url($url) {
+  $query = new EntityFieldQuery();
+  $query->entityCondition('entity_type', 'file')
+    ->propertyCondition('uri', '%' . $url . '%', 'like');
+  $result = $query->execute();
+
+  if (isset($result['file'])) {
+    $file_id = reset(array_keys($result['file']));
+    $file = entity_load_single('file', $file_id);
+
+    return $file;
+  }
+
+  return FALSE;
+}

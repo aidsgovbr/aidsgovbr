@@ -1,0 +1,43 @@
+/**
+ * @file
+ * Styles for pullquote module.
+ */
+
+.pullquote-container {
+  position: relative;
+}
+
+.pullquote-quote {
+  color: #0a2641;
+  float: right;
+  font-family: Optima, Segoe, "Segoe UI", Candara, Calibri, Arial, sans-serif;
+  font-size:1.4em;
+  font-weight: bold;
+  line-height: 150%;
+  margin: 0em 0 0.4em 1em;
+  padding: 0px 40px 20px 50px;
+  width: 30%;
+  position: relative;
+}
+
+/* inserts quotation marks around pullquoted text */
+.pullquote-quote:before {
+  content: "\201C";
+  font-size: 400%;
+  color: #ecd11a;
+  position: absolute;
+  top: 20px;
+  left: 0;
+}
+
+.pullquote-quote.pullquote-left {
+  float: left;
+  margin-left: 0;
+  margin-right: 1em;
+}
+
+.pullquote-quote .attribution {
+  text-transform: uppercase;
+  font-weight: normal;
+  font-size: .7em;
+}

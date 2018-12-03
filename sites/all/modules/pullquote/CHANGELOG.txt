@@ -1,0 +1,32 @@
+﻿Pullquote 7.x-2.2 2013-03-10
+-----------------------------
+Fix issue in which display suite css was being overwritten by pullquote.
+Document usage of left aligned pullquotes.
+
+Pullquote 7.x-2.x 2013-03-10
+-----------------------------
+Make stylesheets work with left pullquote class.
+Fix issue when trying to determine if we should load pullquote on view modes that aren't in the set variable.
+Provide permissions for pullquote configuration pages.
+Allow uses to specify a path to a custom CSS file.
+Provide options to allow users to upload CSS files directly through the admin interface.
+Added text filter.
+Moved CSS files into a separate directory and added CSS file switching along with set of default pullquote CSS styles.
+#908690 by jamiecuthill, dhakshinait, sclm - Added WYSIWYG support.
+Added configuration to allow loading the JS and CSS by view mode.
+Added configuration to allow loading the JS and CSS by node type.
+Added configuration to allow loading the JS and CSS globally or only on content pages.
+
+Pullquote 7.x-1.2, 2011-03-03
+-----------------------------
+Skipped version 7.x-1.1 to that otherwise identical releases with the same
+functionality have corresponding release numbers
+#917422 by lliss: works inside any html tag.
+#1048904 by callison: javascript issue due to jQuery upgrade in D7
+#1068368 by callison: help page added.
+More comprehensive and accurate installation guide added to README.TXT
+CSS code in pullquote.css file improved
+
+Pullquote 7.x-1.x, 2011-01-11
+-----------------------------
+D7 port from 6.x-1.1

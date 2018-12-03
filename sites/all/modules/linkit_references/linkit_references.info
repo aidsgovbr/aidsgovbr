@@ -1,0 +1,11 @@
+name = Linkit References
+description = Adds Linkit support for the Enity Reference and References module (node reference and user reference).
+core = 7.x
+dependencies[] = linkit
+
+; Information added by Drupal.org packaging script on 2016-03-15
+version = "7.x-1.0"
+core = "7.x"
+project = "linkit_references"
+datestamp = "1458013825"
+

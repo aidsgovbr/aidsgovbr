@@ -1,0 +1,44 @@
+/**
+ * @file
+ * Styles for pullquote module.
+ */
+
+.pullquote-container {
+  position: relative;
+}
+
+.pullquote-quote {
+  z-index:1;
+  background: #F5F5F5;
+  border: 1px solid #C2D1E6;
+  border-width: 8px 0;
+  color: #05254F;
+  float: right;
+  font: italic 120% Georgia, "Times New Roman", Times, serif;
+  margin: 1em 0 0.4em 1em;
+  line-height: 150%;
+  padding: 0 1em;
+  width: 30%;
+}
+
+/* inserts quotation marks around pullquoted text */
+.pullquote-quote .pullquote-content:before {
+  content: open-quote;
+}
+
+.pullquote-quote .pullquote-content:after {
+  content: close-quote;
+}
+
+.pullquote-quote.pullquote-left {
+  float: left;
+  margin 0;
+  margin: 1em 1em 0.4em 0em;
+}
+
+.pullquote-quote .attribution {
+  font-style: normal;
+  font-weight: bold;
+  float: right;
+  padding-top: 15px;
+}

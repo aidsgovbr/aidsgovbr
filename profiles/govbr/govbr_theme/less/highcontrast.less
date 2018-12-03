@@ -1,0 +1,52 @@
+.highcontrast {
+  background: black !important;
+  color: white !important;
+  border-color: white !important;
+
+  *, *:before, *:after {
+    background-color: black !important;
+    color: white !important;
+    border-color: white !important;
+  }
+  #header {
+    background: black;
+  }
+  #navbar, #navbar *, #page-header .menu * {
+    background: #ccc !important;
+    color: black !important;
+  }
+  .region-sidebar-first .block-title, #header .header-top .shortcuts li span {
+    background: #333 !important;
+  }
+  .region-content a {
+    color: #fff333 !important;
+    text-decoration: underline !important;
+  }
+  *.font-govbr-square:before, *.font-govbr-square:after {
+    background: white !important;
+    color: black !important;
+  }
+  .no-contrast, .no-contrast * {
+    background-color: #ccc !important;
+    color: black !important;
+    border-color: black !important;
+  }
+  #page-header .block-menu {
+    .block-title {
+      background: black url(../images/destaque-arrow.png) no-repeat right bottom;
+    }
+    .menu, .menu li, .menu li a {
+      background-color: #ccc !important;
+    }
+    .menu > li:last-child {
+      border-right: none !important;
+    }
+  }
+  .contextual-links-wrapper {
+    background-color: #ccc !important;
+
+    * {
+      background-color: #ccc !important;
+    }
+  }
+}

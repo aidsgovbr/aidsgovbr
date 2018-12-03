@@ -1,0 +1,12 @@
+name = Pullquote
+description = Creates a pullquote from selected area(s) in text. This is done through JavaScript and duplicates the marked-up text as a seperately CSS formatted quotation.
+core = 7.x
+configure = admin/config/content/pullquote
+package = Content Display
+
+; Information added by Drupal.org packaging script on 2016-03-13
+version = "7.x-3.1"
+core = "7.x"
+project = "pullquote"
+datestamp = "1457894940"
+

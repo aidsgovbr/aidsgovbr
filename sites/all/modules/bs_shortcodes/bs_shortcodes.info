@@ -1,0 +1,12 @@
+name = Bootstrap 3 Shortcodes
+description = Adds shortcodes for all Bootstrap elements.
+package = Shortcode
+core = 7.x
+dependencies[] = filter
+dependencies[] = shortcode
+; Information added by Drupal.org packaging script on 2017-02-01
+version = "7.x-1.0-beta5"
+core = "7.x"
+project = "bs_shortcodes"
+datestamp = "1485974589"
+

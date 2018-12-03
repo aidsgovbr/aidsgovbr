@@ -1,0 +1,17 @@
+; govbr make file for local development
+core = "7.x"
+api = "2"
+
+projects[drupal][version] = "7.x"
+; include the d.o. profile base
+includes[] = "drupal-org.make"
+
+; +++++ Libraries +++++
+
+; govbr
+libraries[govbr][directory_name] = "govbr"
+libraries[govbr][type] = "profile"
+libraries[govbr][destination] = "../../profiles"
+libraries[govbr][download][type] = "get"
+libraries[govbr][download][url] = "http://ftp.drupal.org/files/projects/govbr-7.x-1.x-dev.tar.gz"
+

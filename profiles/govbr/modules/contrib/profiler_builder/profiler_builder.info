@@ -1,0 +1,19 @@
+; $Id: profiler_builder
+name = "Profiler Builder"
+description = "Turn this site into a profiler distribution fast!"
+package = "Development"
+core = "7.x"
+configure = admin/config/development/profiler_builder
+; Information added by Drupal.org packaging script on 2014-08-26
+version = "7.x-1.2"
+core = "7.x"
+project = "profiler_builder"
+datestamp = "1409079116"
+
+
+; Information added by Drupal.org packaging script on 2015-06-25
+version = "7.x-1.x-dev"
+core = "7.x"
+project = "govbr"
+datestamp = "1435263494"
+

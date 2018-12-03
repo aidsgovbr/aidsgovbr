@@ -1,0 +1,113 @@
+name = GovBR
+description = A responsive Bootstrap based theme with the default identity of the Federal Government of Brazil.
+core = 7.x
+base theme = bootstrap
+
+;;;;;;;;;;;;;;;;;;;;;
+;; Regions
+;;;;;;;;;;;;;;;;;;;;;
+regions[navigation]           = 'Navigation'
+regions[header]               = 'Top Bar'
+regions[highlighted]          = 'Highlighted'
+regions[help]                 = 'Help'
+regions[content]              = 'Content'
+regions[sidebar_first]        = 'Primary'
+regions[footer]               = 'Footer'
+regions[footer_firstcolumn]   = 'Footer first column'
+regions[footer_secondcolumn]  = 'Footer second column'
+regions[footer_thirdcolumn]   = 'Footer third column'
+regions[footer_fourthcolumn]  = 'Footer fourth column'
+
+;;;;;;;;;;;;;;;;;;;;;
+;; Stylesheets
+;;;;;;;;;;;;;;;;;;;;;
+stylesheets[all][] = css/style.css
+
+; ;;;;;;;;;;;;;;;;;;;;;
+; ;; GovBR Scripts
+; ;;;;;;;;;;;;;;;;;;;;;
+scripts[] = 'js/highcontrast.js'
+scripts[] = 'js/mobile.js'
+
+;;;;;;;;;;;;;;;;;;;;;
+;; Theme Settings
+;;;;;;;;;;;;;;;;;;;;;
+
+; Site information
+; --------------
+settings[govbr_theme_info_designation] = 'Denominação do órgão'
+settings[govbr_theme_info_name] = 'Nome Principal'
+settings[govbr_theme_info_subordination] = 'Subordinação'
+
+; Color scheme
+; --------------
+settings[govbr_theme_color_scheme] = 'white'
+
+; Accessibility
+; --------------
+settings[govbr_theme_accessibility_shortcuts]['content'] = 'content'
+settings[govbr_theme_accessibility_shortcuts]['menu'] = 'menu'
+settings[govbr_theme_accessibility_shortcuts]['search'] = 'search'
+settings[govbr_theme_accessibility_shortcuts]['footer'] = 'footer'
+
+settings[govbr_theme_accessibility_page] = 'acessibilidade'
+settings[govbr_theme_accessibility_sitemap] = 'sitemap'
+
+; General
+; --------------
+settings[toggle_logo] = 0
+
+; Region Wells
+; --------------
+settings[bootstrap_region_well-navigation] = ''
+settings[bootstrap_region_well-header] = ''
+settings[bootstrap_region_well-highlighted] = ''
+settings[bootstrap_region_well-help] = ''
+settings[bootstrap_region_well-content] = ''
+settings[bootstrap_region_well-sidebar_first] = ''
+settings[bootstrap_region_well-footer] = ''
+settings[bootstrap_region_well-footer_firstcolumn] = ''
+settings[bootstrap_region_well-footer_secondcolumn] = ''
+settings[bootstrap_region_well-footer_thirdcolumn] = ''
+settings[bootstrap_region_well-footer_fourthcolumn] = ''
+
+;;;;;;;;;;;;;;;;;;;;;
+;; Features
+;;;;;;;;;;;;;;;;;;;;;
+features[] = name
+features[] = node_user_picture
+features[] = comment_user_picture
+features[] = comment_user_verification
+features[] = favicon
+features[] = logo
+features[] = secondary_menu
+
+; ;;;;;;;;;;;;;;;;;;;;;
+; ;; Bootstrap Scripts
+; ;;;;;;;;;;;;;;;;;;;;;
+scripts[] = 'bootstrap/js/affix.js'
+scripts[] = 'bootstrap/js/alert.js'
+scripts[] = 'bootstrap/js/button.js'
+scripts[] = 'bootstrap/js/carousel.js'
+scripts[] = 'bootstrap/js/collapse.js'
+scripts[] = 'bootstrap/js/dropdown.js'
+scripts[] = 'bootstrap/js/modal.js'
+scripts[] = 'bootstrap/js/tooltip.js'
+scripts[] = 'bootstrap/js/popover.js'
+scripts[] = 'bootstrap/js/scrollspy.js'
+scripts[] = 'bootstrap/js/tab.js'
+scripts[] = 'bootstrap/js/transition.js'
+
+; ; Disable BootstrapCDN if using Bootstrap source files in your sub-theme.
+settings[bootstrap_cdn] = ''
+
+; ; Simplytest.me dependencies
+simplytest_dependencies[] = bootstrap
+simplytest_dependencies[] = jquery_update
+
+; Information added by Drupal.org packaging script on 2015-06-24
+version = "7.x-1.0-alpha5"
+core = "7.x"
+project = "govbr_theme"
+datestamp = "1435158183"
+

@@ -1,0 +1,18 @@
+name = Views filebrowser
+description = Integration filebrowser in file field.
+package = Fields
+core = 7.x
+
+dependencies[] = ctools (>=1.9)
+dependencies[] = file
+dependencies[] = file_entity
+dependencies[] = views
+
+files[] = views/ViewsFilebrowserViewsHandlerFieldFilebrowserPreview.inc
+
+; Information added by Drupal.org packaging script on 2016-12-22
+version = "7.x-1.5"
+core = "7.x"
+project = "views_filebrowser"
+datestamp = "1482401286"
+

@@ -1,0 +1,19 @@
+/*
+  were using Bootstrap and Font Awesome
+  http://bootstrapcdn.com
+*/
+
+body { padding-top:0px; }
+
+a {
+    color: #990000;
+    text-decoration: none;
+	font-weight: bold;
+	
+}
+
+a:hover {
+    color: #990000;
+    text-decoration: underline;
+	font-weight: bold;
+}
