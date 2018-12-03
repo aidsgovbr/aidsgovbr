@@ -1,9 +1,0 @@
-V:\Comunicação\NUCLEOS\AUDIOVISUAL\INDETECTAVEL\fontes - cruz
-V:\Comunicação\NUCLEOS\AUDIOVISUAL\INDETECTAVEL\selo_positivo_indetectavel selo_positivo_aprovado_curvas
-
-red = #e41c4d  C31F4C
-azul = #0688de
-
-Fonts:
-LTC Flash - https://www.fonts.com/font/p22/ltc-flash?QueryFontType=Web&src=GoogleWebFonts
-https://fonts.google.com/specimen/Bungee
